@@ -3,13 +3,13 @@ export const SITE_CONFIG = {
   tagline: 'One more good day',
   description: 'We fund small, practical grants that create sober social activities. String enough of those together and you change a life.',
   url: 'https://pmanfoundation.org',
-  ein: 'XX-XXXXXXX', // TODO: Add actual EIN
+  ein: '83-0765464',
   mailingAddress: {
     line1: 'The P-Man Foundation',
-    line2: '', // TODO: Add actual address
+    line2: '2480 Briarcliff Rd Suite 6-176',
     city: 'Atlanta',
     state: 'GA',
-    zip: ''
+    zip: '30329'
   }
 };
 
@@ -38,7 +38,7 @@ export const NAVIGATION: NavigationItem[] = [
 ];
 
 export const EXTERNAL_LINKS = {
-  paypal: 'https://www.paypal.com/donate', // TODO: Update with actual PayPal URL
+  paypal: 'https://www.paypal.com/us/fundraiser/charity/3542611',
   grantApplication: 'https://docs.google.com/forms/d/e/1FAIpQLSf2W3xlEOJnvr3X-Lt0IGxeKa3nFGxMZnEyTs3ae3YVyEhzog/viewform',
   grantsSheet: 'https://docs.google.com/spreadsheets/d/1vtqYR9gcFz_xNPAw7tdz_qB7JjIDO_uHrTYW-BoKKcg/edit?gid=0#gid=0',
   eventbrite: '', // TODO: Add current year's Eventbrite URL
@@ -46,9 +46,8 @@ export const EXTERNAL_LINKS = {
 };
 
 export const SOCIAL_LINKS = {
-  facebook: '',
-  instagram: '',
-  twitter: ''
+  facebook: 'https://facebook.com/pmanfoundation',
+  instagram: 'https://www.instagram.com/thepmanfoundation'
 };
 
 // Brand colors based on the content plan

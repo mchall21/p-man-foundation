@@ -21,28 +21,28 @@ export default function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {NAVIGATION.map((item) => (
-              <div key={item.label} className="relative">
+              <div 
+                key={item.label} 
+                className="relative"
+                onMouseEnter={() => item.children && setOpenDropdown(item.label)}
+                onMouseLeave={() => item.children && setOpenDropdown(null)}
+              >
                 {item.children ? (
                   <>
                     <button
                       className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
-                      onMouseEnter={() => setOpenDropdown(item.label)}
-                      onMouseLeave={() => setOpenDropdown(null)}
                     >
                       {item.label}
                     </button>
                     {openDropdown === item.label && (
-                      <div
-                        className="absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5"
-                        onMouseEnter={() => setOpenDropdown(item.label)}
-                        onMouseLeave={() => setOpenDropdown(null)}
-                      >
+                      <div className="absolute left-0 top-full w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
                         <div className="py-1">
                           {item.children.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors"
+                              onClick={() => setOpenDropdown(null)}
                             >
                               {child.label}
                             </Link>

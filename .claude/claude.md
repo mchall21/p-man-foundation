@@ -1,0 +1,3 @@
+- We're treating google drive as our CMS and asset library. Make sure all photos are organized there.
+- Source of truth for all grant-related data is https://docs.google.com/spreadsheets/d/1vtqYR9gcFz_xNPAw7tdz_qB7JjIDO_uHrTYW-BoKKcg/edit?gid=0#gid=0 ; it's available via .env.local
+- I exported our last site to Squarespace-Wordpress-Export-08-16-2025.xml - Links, contextual info, and old assets are all there for reference. 

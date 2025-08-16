@@ -139,6 +139,7 @@ function processGrant(row: RawGrantRow): ProcessedGrant | null {
     const location = row['Location'] || '';
     const granteeType = row['Grantee Type'] || '';
     const category = row['Category'] || '';
+    const websiteStr = row['Website'] || row['URL'] || '';
     
     // Parse numeric values
     const amount = parseFloat(amountStr.replace(/[$,]/g, '')) || 0;
@@ -180,6 +181,15 @@ function processGrant(row: RawGrantRow): ProcessedGrant | null {
     // Calculate cost per good day
     const costPerGD = amount / goodDays;
     
+    // Extract website - either from dedicated field or description
+    let website = websiteStr.trim();
+    if (!website && description) {
+      const urlMatch = description.match(/(https?:\/\/[^\s,)]+)/i);
+      if (urlMatch) {
+        website = urlMatch[1];
+      }
+    }
+    
     return {
       grantee,
       date: date.toISOString().split('T')[0],
@@ -192,7 +202,8 @@ function processGrant(row: RawGrantRow): ProcessedGrant | null {
       tags: [...new Set(tags)], // Remove duplicates
       description,
       location,
-      granteeType
+      granteeType,
+      website: website || undefined
     };
   } catch (error) {
     console.error('Error processing grant row:', error, row);

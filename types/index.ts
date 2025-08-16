@@ -62,6 +62,9 @@ export interface ProcessedGrant {
   costPerGD: number;
   tags: string[];
   description?: string;
+  location?: string;
+  granteeType?: string;
+  website?: string;
 }
 
 export interface GrantsData {

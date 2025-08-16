@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { MetricCounter } from '@/components/ui/animated-counter';
 import { GoodDaysByYearChart, ActivityMixChart, TopProducersChart, CostStats } from '@/components/ui/charts';
 import { GrantStoryGrid, GrantDetailModal } from '@/components/ui/grant-cards';
+import { GrantsTable } from '@/components/ui/grants-table';
 import { EXTERNAL_LINKS } from '@/lib/constants';
 import type { GrantsData } from '@/types';
 
@@ -193,6 +194,15 @@ export default function ImpactPage() {
         <section>
           <h2 className="text-3xl font-bold mb-8">Stories from the Field</h2>
           <GrantStoryGrid stories={data.top.slice(0, 4)} />
+        </section>
+
+        {/* All Grants Table */}
+        <section>
+          <h2 className="text-3xl font-bold mb-8">Complete Grants Database</h2>
+          <p className="text-gray-600 mb-6">
+            Every grant we've made, sortable and searchable. This is our complete transparency in action.
+          </p>
+          <GrantsTable grants={data.rows} />
         </section>
 
         {/* Methods Box */}
