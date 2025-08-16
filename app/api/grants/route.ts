@@ -18,6 +18,7 @@ interface ProcessedGrant {
   description?: string;
   location?: string;
   granteeType?: string;
+  website?: string;
 }
 
 interface GrantsData {

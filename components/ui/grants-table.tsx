@@ -47,8 +47,8 @@ export function GrantsTable({ grants }: GrantsTableProps) {
       let bVal: string | number = b[sortField];
 
       if (sortField === 'grantee') {
-        aVal = aVal.toLowerCase();
-        bVal = bVal.toLowerCase();
+        aVal = (aVal as string).toLowerCase();
+        bVal = (bVal as string).toLowerCase();
       }
 
       if (sortDirection === 'asc') {
