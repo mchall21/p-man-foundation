@@ -18,7 +18,15 @@ export default function ImpactPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/grants');
+        // Add refresh parameter to bypass cache if needed
+        const params = new URLSearchParams();
+        if (process.env.NODE_ENV === 'development') {
+          params.set('refresh', '1');
+        }
+        
+        const url = `/api/grants${params.toString() ? '?' + params.toString() : ''}`;
+        const response = await fetch(url);
+        
         if (!response.ok) {
           throw new Error('Failed to fetch grants data');
         }
@@ -184,7 +192,7 @@ export default function ImpactPage() {
         {/* Grant Stories */}
         <section>
           <h2 className="text-3xl font-bold mb-8">Stories from the Field</h2>
-          <GrantStoryGrid />
+          <GrantStoryGrid stories={data.top.slice(0, 4)} />
         </section>
 
         {/* Methods Box */}

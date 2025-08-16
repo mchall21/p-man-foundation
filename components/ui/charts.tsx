@@ -52,6 +52,7 @@ export function ActivityMixChart({ data }: ActivityMixChartProps) {
             outerRadius={120}
             paddingAngle={5}
             dataKey="goodDays"
+            nameKey="tag"
           >
             {chartData.map((entry, index) => (
               <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -59,6 +60,7 @@ export function ActivityMixChart({ data }: ActivityMixChartProps) {
           </Pie>
           <Tooltip 
             formatter={(value: number) => [formatNumber(value), 'Good Days']}
+            labelFormatter={(label: string) => label}
           />
           <Legend />
         </PieChart>

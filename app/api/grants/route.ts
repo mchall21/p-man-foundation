@@ -359,9 +359,11 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const refresh = searchParams.get('refresh');
     
-    // Force refresh if requested (for development)
+    // Force refresh by creating a fresh cache entry
     if (refresh === '1') {
-      // Could implement cache busting here
+      // Bypass cache by using a different function
+      const freshData = await fetchFreshGrantsData();
+      return NextResponse.json(freshData);
     }
     
     const data = await getCachedGrantsData();
@@ -373,5 +375,44 @@ export async function GET(request: Request) {
       { error: 'Failed to fetch grants data' },
       { status: 500 }
     );
+  }
+}
+
+// Function to fetch fresh data without caching
+async function fetchFreshGrantsData(): Promise<GrantsData> {
+  try {
+    console.log('Fetching fresh grants data from:', CSV_URL);
+    
+    const response = await fetch(CSV_URL, {
+      headers: {
+        'User-Agent': 'P-Man Foundation Website'
+      },
+      cache: 'no-store' // Ensure fresh fetch
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
+    }
+    
+    const csvText = await response.text();
+    console.log('Fresh CSV data length:', csvText.length);
+    
+    const rawRows = parseCSV(csvText);
+    console.log('Fresh parsed rows:', rawRows.length);
+    
+    const processedGrants = rawRows
+      .map(processGrant)
+      .filter((grant): grant is ProcessedGrant => grant !== null);
+    
+    console.log('Fresh valid grants:', processedGrants.length);
+    
+    const result = analyzeGrants(processedGrants);
+    console.log('Fresh analysis result totals:', result.totals);
+    
+    return result;
+  } catch (error) {
+    console.error('Error fetching fresh grants data:', error);
+    // Fallback to cached data if available
+    return getCachedGrantsData();
   }
 }
