@@ -50,10 +50,25 @@ interface GrantsData {
   rows: ProcessedGrant[];
 }
 
-// Get the CSV URL - using the public sheet URL format
-const SHEET_ID = '1vtqYR9gcFz_xNPAw7tdz_qB7JjIDO_uHrTYW-BoKKcg';
-const GID = '0'; // Main sheet GID
-const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`;
+// Get the CSV URL from environment variables
+function getCSVUrl(): string {
+  // Option 1: Use full CSV URL if provided
+  if (process.env.GRANTS_CSV_URL) {
+    return process.env.GRANTS_CSV_URL;
+  }
+  
+  // Option 2: Build from sheet ID and GID
+  const sheetId = process.env.GRANTS_SHEET_ID;
+  const gid = process.env.GRANTS_SHEET_GID || '0';
+  
+  if (!sheetId) {
+    throw new Error('GRANTS_SHEET_ID or GRANTS_CSV_URL must be set in environment variables');
+  }
+  
+  return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
+}
+
+const CSV_URL = getCSVUrl();
 
 function parseCSV(csvText: string): RawGrantRow[] {
   const lines = csvText.trim().split('\\n');
@@ -266,7 +281,7 @@ const getCachedGrantsData = unstable_cache(
   },
   ['grants-data'],
   {
-    revalidate: 600, // 10 minutes
+    revalidate: parseInt(process.env.GRANTS_CACHE_TTL || '600'), // Default 10 minutes
     tags: ['grants']
   }
 );
