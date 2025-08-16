@@ -31,7 +31,7 @@ export function GrantsTable({ grants }: GrantsTableProps) {
 
   // Filter and sort grants
   const filteredAndSortedGrants = useMemo(() => {
-    let filtered = grants.filter(grant => {
+    const filtered = grants.filter(grant => {
       const matchesYear = filterYear === 'all' || grant.year.toString() === filterYear;
       const matchesType = filterType === 'all' || grant.granteeType === filterType;
       const matchesSearch = searchTerm === '' || 
@@ -43,8 +43,8 @@ export function GrantsTable({ grants }: GrantsTableProps) {
     });
 
     return filtered.sort((a, b) => {
-      let aVal: any = a[sortField];
-      let bVal: any = b[sortField];
+      let aVal: string | number = a[sortField];
+      let bVal: string | number = b[sortField];
 
       if (sortField === 'grantee') {
         aVal = aVal.toLowerCase();

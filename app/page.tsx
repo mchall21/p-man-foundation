@@ -66,7 +66,7 @@ export default function Home() {
                 </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold font-playfair mb-2 group-hover:text-blue-600 transition-colors">
-                    Patrick's Story
+                    Patrick&apos;s Story
                   </h3>
                   <p className="text-gray-600">
                     Learn about Patrick and the meaning behind "one more good day."

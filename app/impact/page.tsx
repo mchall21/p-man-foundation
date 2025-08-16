@@ -207,7 +207,7 @@ export default function ImpactPage() {
 
         {/* Methods Box */}
         <section className="bg-blue-50 p-8 rounded-lg">
-          <h3 className="text-2xl font-bold mb-4">How we count "good days"</h3>
+          <h3 className="text-2xl font-bold mb-4">How we count &ldquo;good days&rdquo;</h3>
           <div className="prose prose-blue">
             <p>
               Each grant includes <em>Estimated Days</em> and <em>Participants</em>. 

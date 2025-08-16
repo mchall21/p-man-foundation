@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: "What won't you fund?",
-    answer: "We don't fund medical treatment, individual rent/bills, or general operating expenses. Grants must directly create sober social activities."
+    answer: "We don&apos;t fund medical treatment, individual rent/bills, or general operating expenses. Grants must directly create sober social activities."
   },
   {
     question: "Can individuals apply?",
@@ -26,7 +26,7 @@ const faqs = [
     answer: "Yes! We encourage organizations to refine their proposals and reapply in future cycles."
   },
   {
-    question: 'How do you define "one more good day"?',
+    question: 'How do you define &ldquo;one more good day&rdquo;?',
     answer: "It's any sober social activity that helps someone in recovery build connections, find joy, and strengthen their sobriety."
   },
   {
@@ -90,7 +90,7 @@ export default function GrantsPage() {
             </li>
             <li className="flex items-start">
               <span className="text-green-600 mr-2">✓</span>
-              <span><strong>Who benefits</strong> tied directly to creating "one more good day"</span>
+              <span><strong>Who benefits</strong> tied directly to creating &ldquo;one more good day&rdquo;</span>
             </li>
             <li className="flex items-start">
               <span className="text-green-600 mr-2">✓</span>
@@ -98,7 +98,7 @@ export default function GrantsPage() {
             </li>
             <li className="flex items-start">
               <span className="text-green-600 mr-2">✓</span>
-              <span>How you'll measure and report impact</span>
+              <span>How you&apos;ll measure and report impact</span>
             </li>
           </ul>
         </div>

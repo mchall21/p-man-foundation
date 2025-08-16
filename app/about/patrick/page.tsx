@@ -3,14 +3,14 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Patrick's Story",
+  title: "Patrick&apos;s Story",
   description: 'Learn about Patrick and the meaning behind "one more good day."',
 };
 
 export default function PatrickStoryPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
-      <h1 className="text-4xl md:text-5xl font-bold font-playfair mb-8">Patrick's Story</h1>
+      <h1 className="text-4xl md:text-5xl font-bold font-playfair mb-8">Patrick&apos;s Story</h1>
       
       <div className="prose prose-lg max-w-none">
         {/* Hero Image */}
@@ -27,14 +27,14 @@ export default function PatrickStoryPage() {
         <div className="bg-red-50 border-l-4 border-red-400 p-6 mb-8">
           <h2 className="text-2xl font-bold font-playfair mb-4">In the Fall of 2015, Patrick Hall died of a drug overdose.</h2>
           <p className="text-lg text-gray-700">
-            He wouldn't have wanted us to sugar coat that fact.
+            He wouldn&apos;t have wanted us to sugar coat that fact.
           </p>
         </div>
 
         <p className="text-xl text-gray-700 mb-8">
           Patrick spent the last years of his life facing addiction head on, raising awareness of the disease, 
-          spreading knowledge about overdose prevention, and urging everyone he knew to "Choose Health" whenever possible. 
-          Addiction took Patrick's life, but his memory and purpose live on through his friends, family, and message.
+          spreading knowledge about overdose prevention, and urging everyone he knew to &ldquo;Choose Health&rdquo; whenever possible. 
+          Addiction took Patrick&apos;s life, but his memory and purpose live on through his friends, family, and message.
         </p>
 
         <div className="bg-blue-50 p-8 rounded-lg my-8">
@@ -47,30 +47,30 @@ export default function PatrickStoryPage() {
           </p>
         </div>
 
-        <h2 className="text-3xl font-bold font-playfair mb-6">Patrick's Life</h2>
+        <h2 className="text-3xl font-bold font-playfair mb-6">Patrick&apos;s Life</h2>
         <p className="mb-6">
           Born on November 5th, 1985, Patrick was raised in Atlanta but remained fiercely loyal to the family, 
-          friends, and sports teams of his place of birth, Chicago. Known affectionately as "P-Man" by his siblings 
-          "Megzy," "Doodle," and "Mo," he was surrounded in life by love, humor, and bad nicknames. Patrick brought 
+          friends, and sports teams of his place of birth, Chicago. Known affectionately as &ldquo;P-Man&rdquo; by his siblings 
+          &ldquo;Megzy,&rdquo; &ldquo;Doodle,&rdquo; and &ldquo;Mo,&rdquo; he was surrounded in life by love, humor, and bad nicknames. Patrick brought 
           infectious laughter and an unparalleled emotional sensitivity to every situation and person he encountered.
         </p>
 
-        <h2 className="text-3xl font-bold font-playfair mb-6">Patrick's Mission</h2>
+        <h2 className="text-3xl font-bold font-playfair mb-6">Patrick&apos;s Mission</h2>
         <p className="mb-6">
           In the last years of his life, Patrick committed himself to "choose health" and to help others. To Patrick, 
-          "Choose Health" meant more than just staying fit. It meant actively making decisions that better yourself, 
+          &ldquo;Choose Health&rdquo; meant more than just staying fit. It meant actively making decisions that better yourself, 
           whenever possible, whether they be about the food you eat, the company you keep, or the habits you develop. 
-          This mantra is what led him to cycling in the first place, and it's what sparked the idea for "Pedal For P-Man."
+          This mantra is what led him to cycling in the first place, and it&apos;s what sparked the idea for "Pedal For P-Man."
         </p>
 
         <p className="mb-6">
-          Patrick's journey through recovery taught us that the path to lasting sobriety isn't just about avoiding 
-          substances—it's about building a life worth living, one day at a time. He understood that social connection 
+          Patrick&apos;s journey through recovery taught us that the path to lasting sobriety isn&apos;t just about avoiding 
+          substances—it&apos;s about building a life worth living, one day at a time. He understood that social connection 
           and meaningful activities were essential to recovery.
         </p>
 
         <p className="mb-6">
-          Patrick's work, both professionally and voluntarily, strove to help those who so often go overlooked—the 
+          Patrick&apos;s work, both professionally and voluntarily, strove to help those who so often go overlooked—the 
           homeless, the addicted, the forgotten. He was actively involved with{' '}
           <a href="https://www.shatterproof.org/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800 underline">
             Shatterproof
@@ -82,7 +82,7 @@ export default function PatrickStoryPage() {
         </p>
 
         <p className="mb-8">
-          The annual Pedal for P-Man ride began as a way to honor Patrick's memory and continue his mission. 
+          The annual Pedal for P-Man ride began as a way to honor Patrick&apos;s memory and continue his mission. 
           What started as a small group of friends cycling through Atlanta has grown into a movement that funds 
           dozens of grants each year, creating opportunities for people in recovery to have one more good day.
         </p>
@@ -127,9 +127,9 @@ export default function PatrickStoryPage() {
         </div>
 
         <div className="bg-blue-50 p-8 rounded-lg mt-12">
-          <h2 className="text-2xl font-bold font-playfair mb-4">Continue Patrick's Legacy</h2>
+          <h2 className="text-2xl font-bold font-playfair mb-4">Continue Patrick&apos;s Legacy</h2>
           <p className="mb-6">
-            Through the P-Man Foundation, we're ensuring that Patrick's vision lives on—helping people in recovery 
+            Through the P-Man Foundation, we&apos;re ensuring that Patrick&apos;s vision lives on—helping people in recovery 
             find community, purpose, and joy in sober activities. Every grant we fund, every event we support, 
             is another opportunity for someone to have one more good day.
           </p>
