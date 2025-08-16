@@ -16,6 +16,8 @@ interface ProcessedGrant {
   costPerGD: number;
   tags: string[];
   description?: string;
+  location?: string;
+  granteeType?: string;
 }
 
 interface GrantsData {
@@ -71,30 +73,72 @@ function getCSVUrl(): string {
 const CSV_URL = getCSVUrl();
 
 function parseCSV(csvText: string): RawGrantRow[] {
-  const lines = csvText.trim().split('\\n');
-  const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim());
+  const lines = csvText.trim().split('\n');
+  if (lines.length < 2) return [];
   
-  return lines.slice(1).map(line => {
-    const values = line.split(',').map(v => v.replace(/"/g, '').trim());
+  // More robust CSV parsing that handles quoted values with commas
+  function parseCSVLine(line: string): string[] {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      const nextChar = line[i + 1];
+      
+      if (char === '"' && nextChar === '"') {
+        current += '"';
+        i++; // Skip next quote
+      } else if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim());
+    return result;
+  }
+  
+  const headers = parseCSVLine(lines[0]);
+  console.log('CSV Headers:', headers);
+  
+  return lines.slice(1).map((line, index) => {
+    const values = parseCSVLine(line);
     const row: RawGrantRow = {};
-    headers.forEach((header, index) => {
-      row[header] = values[index] || '';
+    headers.forEach((header, headerIndex) => {
+      row[header] = values[headerIndex] || '';
     });
+    
+    // Log first few rows for debugging
+    if (index < 3) {
+      console.log(`Row ${index + 1}:`, row);
+    }
+    
     return row;
+  }).filter(row => {
+    // Filter out empty rows
+    const hasData = Object.values(row).some(value => value && value.trim() !== '');
+    return hasData;
   });
 }
 
 function processGrant(row: RawGrantRow): ProcessedGrant | null {
   try {
-    // Extract key fields (adjust based on actual sheet headers)
-    const grantee = row['Organization'] || row['Grantee'] || '';
-    const dateStr = row['Date'] || row['Grant Date'] || '';
-    const amountStr = row['Amount'] || row['Grant Amount'] || '0';
-    const participantsStr = row['Participants'] || row['Estimated Participants'] || '0';
-    const daysStr = row['Days'] || row['Event Days'] || '0';
-    const goodDaysStr = row['Good Days'] || row['Estimated Good Days'] || '0';
-    const tagsStr = row['Sober Social Activity Type'] || row['Tags'] || '';
-    const description = row['Description'] || row['Purpose'] || '';
+    // Extract key fields based on your exact sheet headers
+    const grantee = row['Grantee Name'] || row['Grantee'] || '';
+    const dateStr = row['Date'] || '';
+    const amountStr = row['Amount'] || '0';
+    const participantsStr = row['Participants'] || '0';
+    const daysStr = row['Estimated Days'] || '0';
+    const goodDaysStr = row['Good Days'] || '0';
+    const tagsStr = row['Sober Social Activity Type'] || '';
+    const description = row['Description'] || '';
+    const location = row['Location'] || '';
+    const granteeType = row['Grantee Type'] || '';
+    const category = row['Category'] || '';
     
     // Parse numeric values
     const amount = parseFloat(amountStr.replace(/[$,]/g, '')) || 0;
@@ -116,8 +160,22 @@ function processGrant(row: RawGrantRow): ProcessedGrant | null {
     const date = new Date(dateStr);
     const year = date.getFullYear() || new Date().getFullYear();
     
-    // Parse tags
-    const tags = tagsStr.split(/[,;|]/).map(tag => tag.trim()).filter(Boolean);
+    // Parse tags - handle both comma-separated and the categories
+    const tags = tagsStr.split(/[,;|]/).map(tag => 
+      tag.trim()
+        .replace(/💪|🌿|🎉|🎨|🙏/g, '') // Remove emoji
+        .trim()
+    ).filter(Boolean);
+    
+    // Add category tags if available
+    if (category) {
+      const categoryTags = category.split(/[,;|]/).map(tag => 
+        tag.trim()
+          .replace(/💪|🌿|🎉|🎨|🙏/g, '') // Remove emoji
+          .trim()
+      ).filter(Boolean);
+      tags.push(...categoryTags);
+    }
     
     // Calculate cost per good day
     const costPerGD = amount / goodDays;
@@ -131,8 +189,10 @@ function processGrant(row: RawGrantRow): ProcessedGrant | null {
       days: days || undefined,
       goodDays,
       costPerGD,
-      tags,
-      description
+      tags: [...new Set(tags)], // Remove duplicates
+      description,
+      location,
+      granteeType
     };
   } catch (error) {
     console.error('Error processing grant row:', error, row);
@@ -236,6 +296,7 @@ const getCachedGrantsData = unstable_cache(
       
       const csvText = await response.text();
       console.log('CSV data length:', csvText.length);
+      console.log('First 500 chars:', csvText.substring(0, 500));
       
       const rawRows = parseCSV(csvText);
       console.log('Parsed rows:', rawRows.length);
@@ -246,7 +307,14 @@ const getCachedGrantsData = unstable_cache(
       
       console.log('Valid grants:', processedGrants.length);
       
-      return analyzeGrants(processedGrants);
+      if (processedGrants.length > 0) {
+        console.log('Sample processed grant:', processedGrants[0]);
+      }
+      
+      const result = analyzeGrants(processedGrants);
+      console.log('Analysis result totals:', result.totals);
+      
+      return result;
     } catch (error) {
       console.error('Error fetching grants data:', error);
       
