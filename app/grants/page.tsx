@@ -11,7 +11,7 @@ const faqs = [
   },
   {
     question: "What's the typical grant size?",
-    answer: "Grants typically range from $500 to $10,000, with most awards between $3,000 and $5,000."
+    answer: "Microgrants range from $500 to $5,000, with most awards between $3,000 and $5,000."
   },
   {
     question: "What won't you fund?",
@@ -55,7 +55,7 @@ export default function GrantsPage() {
         <div className="bg-blue-50 p-8 rounded-lg mb-8">
           <h2 className="text-2xl font-bold mb-4">What We Fund</h2>
           <p className="text-lg mb-4">
-            Microgrants ($500–$10,000) that increase the availability and frequency of 
+            Microgrants ($500–$5,000) that increase the availability and frequency of 
             sober social activities. Priority: <strong>post-treatment reintegration</strong>.
           </p>
         </div>
@@ -94,7 +94,7 @@ export default function GrantsPage() {
             </li>
             <li className="flex items-start">
               <span className="text-green-600 mr-2">✓</span>
-              <span>Realistic plan if we fund <strong>$3–5k</strong> as part of a larger goal</span>
+              <span><strong>Realistic plan to execute entire plan</strong>, especially if we're only partially funding</span>
             </li>
             <li className="flex items-start">
               <span className="text-green-600 mr-2">✓</span>
@@ -152,11 +152,16 @@ export default function GrantsPage() {
       {/* Partial Funding Note */}
       <div className="bg-gray-50 p-8 rounded-lg mb-8">
         <h3 className="text-xl font-bold mb-3">Note on Partial Funding</h3>
-        <p className="text-gray-700">
+        <p className="text-gray-700 mb-4">
           If you need $50,000 for a comprehensive program, show us exactly how our 
           $3,000–$5,000 portion would still create value if the rest doesn't come through. 
           We love being part of bigger initiatives when our contribution has clear, 
           standalone impact.
+        </p>
+        <p className="text-gray-700">
+          <strong>It's tough for us to be the first donor of a much larger initiative unless 
+          there's high conviction on follow through.</strong> Show us your track record, other 
+          committed funding sources, or a scaled-down version that works with just our grant.
         </p>
       </div>
 
