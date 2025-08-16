@@ -7,7 +7,14 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center bg-gray-900">
-        {/* Background Image Placeholder */}
+        {/* Background Image */}
+        <Image
+          src="/images/hero/foundation-header.jpg"
+          alt="P-Man Foundation cyclists"
+          fill
+          className="object-cover"
+          priority
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/30" />
         
         <div className="relative z-10 text-center text-white px-4">
@@ -78,7 +85,14 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <Link href="/about/patrick" className="group">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gray-300"></div>
+                <div className="relative h-48">
+                  <Image
+                    src="/images/general/image-asset.jpeg"
+                    alt="Patrick's story"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                     Patrick's Story
@@ -92,7 +106,14 @@ export default function Home() {
 
             <Link href="/grants" className="group">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gray-300"></div>
+                <div className="relative h-48">
+                  <Image
+                    src="/images/ride-photos/2018/event-photo-1.jpg"
+                    alt="Grant recipients enjoying activities"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                     Our Grants
@@ -106,7 +127,14 @@ export default function Home() {
 
             <Link href="/pedal" className="group">
               <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="h-48 bg-gray-300"></div>
+                <div className="relative h-48">
+                  <Image
+                    src="/images/ride-photos/2016/group-photo-1.jpg"
+                    alt="Pedal for P-Man cyclists"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                     Pedal for P-Man
