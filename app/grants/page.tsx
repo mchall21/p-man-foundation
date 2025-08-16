@@ -15,7 +15,7 @@ const faqs = [
   },
   {
     question: "What won't you fund?",
-    answer: "We don&apos;t fund medical treatment, individual rent/bills, or general operating expenses. Grants must directly create sober social activities."
+    answer: "We don't fund medical treatment, individual rent/bills, or general operating expenses. Grants must directly create sober social activities."
   },
   {
     question: "Can individuals apply?",
@@ -26,7 +26,7 @@ const faqs = [
     answer: "Yes! We encourage organizations to refine their proposals and reapply in future cycles."
   },
   {
-    question: 'How do you define &ldquo;one more good day&rdquo;?',
+    question: 'How do you define "one more good day"?',
     answer: "It's any sober social activity that helps someone in recovery build connections, find joy, and strengthen their sobriety."
   },
   {
