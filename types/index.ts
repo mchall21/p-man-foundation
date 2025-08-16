@@ -50,3 +50,48 @@ export interface Asset {
   caption?: string;
   category?: string;
 }
+
+export interface ProcessedGrant {
+  grantee: string;
+  date: string;
+  amount: number;
+  year: number;
+  participants?: number;
+  days?: number;
+  goodDays: number;
+  costPerGD: number;
+  tags: string[];
+  description?: string;
+}
+
+export interface GrantsData {
+  updatedAt: string;
+  totals: {
+    dollars: number;
+    goodDays: number;
+    costPerGD: number;
+  };
+  byYear: Array<{
+    year: number;
+    dollars: number;
+    goodDays: number;
+  }>;
+  byTag: Array<{
+    tag: string;
+    dollars: number;
+    goodDays: number;
+  }>;
+  top: Array<{
+    grantee: string;
+    goodDays: number;
+    costPerGD: number;
+    description: string;
+    amount: number;
+  }>;
+  costStats: {
+    min: number;
+    median: number;
+    max: number;
+  };
+  rows: ProcessedGrant[];
+}
