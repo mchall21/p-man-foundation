@@ -51,12 +51,37 @@ export default function FoundationPage() {
           </p>
         </div>
 
-        {/* YouTube Video Embed Placeholder */}
+        {/* YouTube Video Embed */}
         <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Learn More About Our Work</h2>
-          <div className="aspect-video bg-gray-300 rounded-lg flex items-center justify-center">
-            <p className="text-gray-600">Foundation Video</p>
+          <h2 className="text-2xl font-bold mb-4">Patrick's Story</h2>
+          <div className="aspect-video rounded-lg overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/ZBCQMdtdLWc"
+              title="Patrick's Story"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="w-full h-full"
+            ></iframe>
           </div>
+        </div>
+
+        <div className="bg-amber-50 p-8 rounded-lg mb-12">
+          <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+          <p className="text-lg mb-4">
+            The P-Man Foundation was born from love, loss, and hope. We are made up of Patrick's 
+            friends and family who walked alongside him through multiple cycles of recovery and relapse. 
+            Through those experiences, we witnessed something crucial that shaped our mission.
+          </p>
+          <p className="text-lg mb-4">
+            While there was significant attention and resources dedicated to the early stages of 
+            recovery—the critical first days and weeks—we saw a gap in support for what comes next: 
+            the long journey of maintenance and reintegration into everyday life.
+          </p>
+          <p className="text-lg">
+            From this understanding, we landed on our "one more good day" mission. Because recovery 
+            isn't just about getting clean—it's about building a life worth living, one day at a time, 
+            surrounded by community and purpose.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
