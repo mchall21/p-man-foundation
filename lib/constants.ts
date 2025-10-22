@@ -41,7 +41,7 @@ export const EXTERNAL_LINKS = {
   paypal: 'https://www.paypal.com/us/fundraiser/charity/3542611',
   grantApplication: 'https://docs.google.com/forms/d/e/1FAIpQLSf2W3xlEOJnvr3X-Lt0IGxeKa3nFGxMZnEyTs3ae3YVyEhzog/viewform',
   grantsSheet: 'https://docs.google.com/spreadsheets/d/1vtqYR9gcFz_xNPAw7tdz_qB7JjIDO_uHrTYW-BoKKcg/edit?gid=0#gid=0',
-  eventbrite: '', // TODO: Add current year's Eventbrite URL
+  eventbrite: 'https://www.eventbrite.com/e/pedal-for-p-man-10-tickets-1748386995569?aff=oddtdtcreator',
   pledgeVendor: '' // TODO: Add when vendor selected
 };
 

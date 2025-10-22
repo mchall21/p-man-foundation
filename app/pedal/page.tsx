@@ -23,6 +23,14 @@ export default function PedalPage() {
           <p className="text-lg">Grant Park, Atlanta, Georgia</p>
           <p className="text-lg mt-4 text-blue-200">More details to come</p>
         </div>
+        <a
+          href={EXTERNAL_LINKS.eventbrite}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-6 bg-white text-blue-600 font-bold py-4 px-8 rounded-lg hover:bg-blue-50 transition-colors text-xl shadow-lg"
+        >
+          Register on Eventbrite
+        </a>
       </div>
 
 
