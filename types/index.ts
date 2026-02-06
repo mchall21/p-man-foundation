@@ -98,3 +98,30 @@ export interface GrantsData {
   };
   rows: ProcessedGrant[];
 }
+
+// Grant Application Review Types
+export interface GrantApplication {
+  rowIndex: number;
+  timestamp: string;
+  name: string;
+  title: string;
+  address: string;
+  email: string;
+  phone: string;
+  socialMedia: string;
+  applicantType: string;
+  organizationDetails: string;
+  nonprofitStatus: string;
+  purpose: string;
+  amountRequested: number;
+  budget: string;
+  peopleServed: string;
+  impact: string;
+  startDate: string;
+  eventType: string;
+  additionalInfo: string;
+  molly: string;
+  decision: string;
+  approvedAmount: string;
+  why: string;
+}
