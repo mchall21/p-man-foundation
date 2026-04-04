@@ -169,18 +169,23 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    const payload = { rowIndex, decision, approvedAmount, why };
+    console.log('Sending to Google Script:', JSON.stringify(payload));
+
     const response = await fetch(scriptUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ rowIndex, decision, approvedAmount, why }),
+      body: JSON.stringify(payload),
       redirect: 'follow',
     });
 
+    console.log('Google Script response status:', response.status);
     // Google Apps Script returns 302 redirect, then the actual response
     // We need to handle both HTML redirect and JSON response
     const text = await response.text();
+    console.log('Google Script response body:', text.substring(0, 500));
 
     let result;
     if (text.includes('<HTML>') || text.includes('Moved Temporarily')) {

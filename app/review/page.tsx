@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { GrantApplication } from '@/types';
-import { ChevronLeft, ChevronRight, ExternalLink, Check, X, HelpCircle, DollarSign, RefreshCw, Calculator } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Check, X, HelpCircle, DollarSign, RefreshCw, Calculator, ClipboardList } from 'lucide-react';
 
 const SHEET_ID = '1esaDQaoVY8vTd0gd5LxA4KCWk0oMXVEPCY-pQ3aS-Xg';
 const BUDGET_STORAGE_KEY = 'pman-grant-review-budget';
@@ -39,14 +39,14 @@ function StatusBadge({ decision }: { decision: string }) {
       </span>
     );
   }
-  const isApproved = decision.toLowerCase().includes('approve') || decision.toLowerCase() === 'yes';
-  const isDenied = decision.toLowerCase().includes('den') || decision.toLowerCase() === 'no';
+  const isApproved = decision.toLowerCase() === 'yes';
+  const isDenied = decision.toLowerCase() === 'no';
 
   if (isApproved) {
     return (
       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
         <Check className="w-3 h-3" />
-        Approved
+        Yes
       </span>
     );
   }
@@ -54,7 +54,7 @@ function StatusBadge({ decision }: { decision: string }) {
     return (
       <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
         <X className="w-3 h-3" />
-        Denied
+        No
       </span>
     );
   }
@@ -95,6 +95,8 @@ export default function ReviewPage() {
   const [editAmount, setEditAmount] = useState('');
   const [editWhy, setEditWhy] = useState('');
   const [needsSetup, setNeedsSetup] = useState(false);
+  const [savedDecisions, setSavedDecisions] = useState<Array<{ rowIndex: number; name: string; decision: string; approvedAmount: string; why: string }>>([]);
+  const [showSaved, setShowSaved] = useState(false);
 
   // Load budget from localStorage on mount
   useEffect(() => {
@@ -118,7 +120,7 @@ export default function ReviewPage() {
       const decision = app.decision?.toLowerCase() || '';
       const amount = parseFloat(app.approvedAmount?.replace(/[$,]/g, '') || '0') || app.amountRequested;
 
-      if (decision.includes('approve') || decision === 'yes') {
+      if (decision === 'yes') {
         approved += parseFloat(app.approvedAmount?.replace(/[$,]/g, '') || '0') || 0;
       } else if (decision.includes('maybe') || decision.includes('consider')) {
         maybe += amount;
@@ -197,6 +199,17 @@ export default function ReviewPage() {
       }
 
       if (data.success) {
+        // Track this save
+        setSavedDecisions((prev) => {
+          const existing = prev.findIndex((s) => s.rowIndex === current.rowIndex);
+          const entry = { rowIndex: current.rowIndex, name: current.name, decision: editDecision, approvedAmount: editAmount, why: editWhy };
+          if (existing >= 0) {
+            const updated = [...prev];
+            updated[existing] = entry;
+            return updated;
+          }
+          return [...prev, entry];
+        });
         // Update local state
         setApplications((prev) =>
           prev.map((app) =>
@@ -517,15 +530,15 @@ export default function ReviewPage() {
             {/* Quick Decision Buttons */}
             <div className="flex items-center gap-2">
               <button
-                onClick={() => quickDecision('Approved', current.amountRequested.toString())}
+                onClick={() => quickDecision('Yes', current.amountRequested.toString())}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  editDecision.toLowerCase().includes('approve')
+                  editDecision.toLowerCase() === 'yes'
                     ? 'bg-green-600 text-white'
                     : 'bg-green-100 text-green-700 hover:bg-green-200'
                 }`}
               >
                 <Check className="w-4 h-4 inline mr-1" />
-                Approve
+                Yes
               </button>
               <button
                 onClick={() => quickDecision('Maybe')}
@@ -539,15 +552,15 @@ export default function ReviewPage() {
                 Maybe
               </button>
               <button
-                onClick={() => quickDecision('Denied', '0')}
+                onClick={() => quickDecision('No', '0')}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  editDecision.toLowerCase().includes('den')
+                  editDecision.toLowerCase() === 'no'
                     ? 'bg-red-600 text-white'
                     : 'bg-red-100 text-red-700 hover:bg-red-200'
                 }`}
               >
                 <X className="w-4 h-4 inline mr-1" />
-                Deny
+                No
               </button>
             </div>
 
@@ -615,6 +628,70 @@ export default function ReviewPage() {
           </div>
         </div>
       </div>
+
+      {/* Saved Decisions Toggle */}
+      {savedDecisions.length > 0 && (
+        <div className="fixed bottom-4 right-4 z-50">
+          <button
+            onClick={() => setShowSaved(!showSaved)}
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition-colors"
+          >
+            <ClipboardList className="w-4 h-4" />
+            {savedDecisions.length} Saved
+          </button>
+        </div>
+      )}
+
+      {/* Saved Decisions Panel */}
+      {showSaved && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setShowSaved(false)}>
+          <div className="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between p-4 border-b">
+              <h2 className="text-lg font-semibold">Saved Decisions This Session</h2>
+              <button onClick={() => setShowSaved(false)} className="p-1 hover:bg-gray-100 rounded">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <div className="p-4 text-sm text-gray-600 bg-amber-50 border-b border-amber-100">
+              These decisions were saved locally but may not have written to the sheet. Update the sheet manually using the row numbers below.
+            </div>
+            <div className="overflow-auto max-h-[60vh]">
+              <table className="w-full text-sm">
+                <thead className="bg-gray-50 sticky top-0">
+                  <tr>
+                    <th className="text-left px-4 py-2 font-medium text-gray-600">Row</th>
+                    <th className="text-left px-4 py-2 font-medium text-gray-600">Name</th>
+                    <th className="text-left px-4 py-2 font-medium text-gray-600">Decision</th>
+                    <th className="text-left px-4 py-2 font-medium text-gray-600">Amount</th>
+                    <th className="text-left px-4 py-2 font-medium text-gray-600">Why</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {savedDecisions.map((s) => (
+                    <tr key={s.rowIndex} className="border-t hover:bg-gray-50">
+                      <td className="px-4 py-2 font-mono text-gray-500">{s.rowIndex}</td>
+                      <td className="px-4 py-2">{s.name}</td>
+                      <td className="px-4 py-2">
+                        <span className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${
+                          s.decision.toLowerCase() === 'yes'
+                            ? 'bg-green-100 text-green-700'
+                            : s.decision.toLowerCase() === 'no'
+                            ? 'bg-red-100 text-red-700'
+                            : 'bg-yellow-100 text-yellow-700'
+                        }`}>
+                          {s.decision}
+                        </span>
+                      </td>
+                      <td className="px-4 py-2">{s.approvedAmount ? `$${s.approvedAmount}` : '—'}</td>
+                      <td className="px-4 py-2 text-gray-600 max-w-[200px] truncate">{s.why || '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
 
           </div>
   );
