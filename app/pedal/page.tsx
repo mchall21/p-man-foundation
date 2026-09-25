@@ -14,9 +14,9 @@ export default function PedalPage() {
       {/* Save the Date */}
       <div className="bg-blue-600 text-white p-8 rounded-lg mb-12 text-center">
         <h2 className="text-4xl font-bold mb-4">Save the Date!</h2>
-        <div className="text-6xl font-bold mb-4">November 8, 2025</div>
+        <div className="text-6xl font-bold mb-4">November 14, 2026</div>
         <p className="text-2xl mb-6">
-          Join us for the 10th annual Pedal for P-Man ride!
+          Join us for the 11th annual Pedal for P-Man ride!
         </p>
         <div className="bg-blue-700 rounded-lg p-6 max-w-2xl mx-auto">
           <h3 className="font-bold text-xl mb-2">Location</h3>

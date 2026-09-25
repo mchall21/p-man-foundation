@@ -17,7 +17,7 @@ export default function PledgePage() {
           <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
             Can't make it to the ride? Soon you'll be able to pledge a dollar amount per mile 
             and support our mission from anywhere. We're working on making this feature available 
-            for the 2025 ride.
+            for the 2026 ride.
           </p>
         </div>
 
