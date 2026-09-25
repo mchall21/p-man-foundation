@@ -71,8 +71,6 @@ function getCSVUrl(): string {
   return `https://docs.google.com/spreadsheets/d/${sheetId}/export?format=csv&gid=${gid}`;
 }
 
-const CSV_URL = getCSVUrl();
-
 function parseCSV(csvText: string): RawGrantRow[] {
   const lines = csvText.trim().split('\n');
   if (lines.length < 2) return [];
@@ -292,11 +290,11 @@ function analyzeGrants(grants: ProcessedGrant[]): GrantsData {
 
 // Cache the data processing for 10 minutes
 const getCachedGrantsData = unstable_cache(
-  async (): Promise<GrantsData> => {
+  async (csvUrl: string): Promise<GrantsData> => {
     try {
-      console.log('Fetching grants data from:', CSV_URL);
+      console.log('Fetching grants data from:', csvUrl);
       
-      const response = await fetch(CSV_URL, {
+      const response = await fetch(csvUrl, {
         headers: {
           'User-Agent': 'P-Man Foundation Website'
         }
@@ -368,17 +366,19 @@ const getCachedGrantsData = unstable_cache(
 
 export async function GET(request: Request) {
   try {
+    // Resolve configuration per request so missing preview settings do not break builds.
+    const csvUrl = getCSVUrl();
     const { searchParams } = new URL(request.url);
     const refresh = searchParams.get('refresh');
     
     // Force refresh by creating a fresh cache entry
     if (refresh === '1') {
       // Bypass cache by using a different function
-      const freshData = await fetchFreshGrantsData();
+      const freshData = await fetchFreshGrantsData(csvUrl);
       return NextResponse.json(freshData);
     }
     
-    const data = await getCachedGrantsData();
+    const data = await getCachedGrantsData(csvUrl);
     
     return NextResponse.json(data);
   } catch (error) {
@@ -391,11 +391,11 @@ export async function GET(request: Request) {
 }
 
 // Function to fetch fresh data without caching
-async function fetchFreshGrantsData(): Promise<GrantsData> {
+async function fetchFreshGrantsData(csvUrl: string): Promise<GrantsData> {
   try {
-    console.log('Fetching fresh grants data from:', CSV_URL);
+    console.log('Fetching fresh grants data from:', csvUrl);
     
-    const response = await fetch(CSV_URL, {
+    const response = await fetch(csvUrl, {
       headers: {
         'User-Agent': 'P-Man Foundation Website'
       },
@@ -425,6 +425,6 @@ async function fetchFreshGrantsData(): Promise<GrantsData> {
   } catch (error) {
     console.error('Error fetching fresh grants data:', error);
     // Fallback to cached data if available
-    return getCachedGrantsData();
+    return getCachedGrantsData(csvUrl);
   }
 }
