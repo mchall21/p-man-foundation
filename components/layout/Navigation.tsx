@@ -10,6 +10,7 @@ const links = [
   { href: '/impact', label: 'Our impact' },
   { href: '/grants', label: 'Grants' },
   { href: '/pedal', label: 'The ride' },
+  { href: '/pedal/history', label: 'Ride history' },
   { href: '/contact', label: 'Contact' },
 ];
 
