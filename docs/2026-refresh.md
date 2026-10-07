@@ -49,3 +49,11 @@ Historical estimated good days remain 6,921. After import, coverage should be 63
 - Homepage and Impact render at 390px without page overflow; main mobile navigation opens.
 - Photo gallery and 2026 ride page render; embedded video reaches playing state.
 - Simulated grant-network failure renders unavailable copy instead of fake data or a permanent skeleton.
+
+## Review revision: onsite media and grant features
+
+Replaced the Drive iframe with a native HTML5 player and a 40 MB, 720p H.264/AAC derivative of the supplied 2025 film (original remains in Drive). The film loads only after the visitor presses play. Removed Drive album/photo exits; gallery photos open website-hosted files. The impact-page source link now points to the onsite grant records.
+
+Replaced the automatically ranked spreadsheet cards with four editorial summaries matched to specific historical awards (organization, year, amount). Copy describes funded activities, not measured outcomes or participant testimonials. Uses the 2025 No Longer Bound equipment award, 2022 Hickey House equipment award, 2024 Brainwashed Coffee pickleball award, and 2021 Doc’s Place surfing award.
+
+Validation: scoped ESLint, TypeScript, desktop/mobile layout and native video playback. No source sharing permissions changed. Supplied film has no caption track; a reviewed transcript/caption file is still needed.

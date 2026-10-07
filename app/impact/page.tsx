@@ -6,7 +6,6 @@ import { MetricCounter } from '@/components/ui/animated-counter';
 import { AwardsByYearChart, ActivityMixChart, TopProducersChart, CostStats } from '@/components/ui/charts';
 import { GrantStoryGrid, GrantDetailModal } from '@/components/ui/grant-cards';
 import { GrantsTable } from '@/components/ui/grants-table';
-import { EXTERNAL_LINKS } from '@/lib/constants';
 import type { GrantsData } from '@/types';
 
 export default function ImpactPage() {
@@ -188,12 +187,14 @@ export default function ImpactPage() {
 
         {/* Grant Stories */}
         <section>
-          <h2 className="text-3xl font-bold mb-8">Stories from the Field</h2>
-          <GrantStoryGrid stories={data.top.slice(0, 4)} />
+          <p className="eyebrow mb-4">Grants in action</p>
+          <h2 className="section-heading mb-6">What a grant makes possible.</h2>
+          <p className="max-w-2xl text-lg text-slate-600 mb-10">A gym, a game, a day on the water. These past awards show the practical ways we support connection and activity in recovery.</p>
+          <GrantStoryGrid grants={data.rows} />
         </section>
 
         {/* All Grants Table */}
-        <section>
+        <section id="grant-database">
           <h2 className="text-3xl font-bold mb-8">Complete Grants Database</h2>
           <p className="text-gray-600 mb-6">
             Awards recorded in our grant log, sortable and searchable. Awarded amounts do not indicate payment status.
@@ -220,12 +221,10 @@ export default function ImpactPage() {
           </div>
           <div className="mt-6">
             <a
-              href={EXTERNAL_LINKS.grantsSheet}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#grant-database"
               className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
             >
-              View the current grant log →
+              Explore the grant records →
             </a>
           </div>
         </section>

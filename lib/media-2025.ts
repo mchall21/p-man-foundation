@@ -119,6 +119,6 @@ export const pedal2025Video = {
   title: '2025 Pedal for P-Man recap',
   driveId: '1qXPqpFvasQFtml4tZrjLV6O5gsin3boV',
   url: 'https://drive.google.com/file/d/1qXPqpFvasQFtml4tZrjLV6O5gsin3boV/view',
-  embedUrl: 'https://drive.google.com/file/d/1qXPqpFvasQFtml4tZrjLV6O5gsin3boV/preview',
+  src: '/videos/pedal-2025.mp4',
   poster: pedal2025Group.src,
 }

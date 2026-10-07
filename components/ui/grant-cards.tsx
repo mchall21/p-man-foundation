@@ -1,89 +1,32 @@
 'use client';
 
-import Image from 'next/image';
 import { formatCurrency, formatNumber } from '@/lib/utils';
 import type { GrantsData } from '@/types';
 
-interface GrantStoryCardProps {
-  title: string;
-  description: string;
-  goodDays: number;
-  costPerDay: number;
-  image?: string;
-  link?: string;
-}
+// Editorial summaries of specific historical awards, not reported outcomes.
+const grantFeatures = [
+  { grantee: 'No Longer Bound', year: 2025, amount: 2000, title: 'A place to show up and work out', category: 'Movement', description: 'A $2,000 grant supported weightlifting and boxing equipment for No Longer Bound’s new gym in Cumming. The award puts the focus on an everyday opportunity: making exercise part of life in recovery.' },
+  { grantee: 'Hickey House', year: 2022, amount: 4000, title: 'More ways to get moving', category: 'Movement', description: 'At Hickey House in Helen, a $4,000 grant supported upgrades to weights, cardio equipment, and sports equipment. It is a practical investment in the space and tools people can use to be active.' },
+  { grantee: 'Brainwashed Coffee', year: 2024, amount: 1000, title: 'Connection across the net', category: 'Play', description: 'A $1,000 grant to Brainwashed Coffee in Chester supported a pickleball space and tournament. A shared game gives people a reason to get together, with the activity itself at the center of the gathering.' },
+  { grantee: 'Docs place', displayName: 'Doc’s Place', year: 2021, amount: 1500, title: 'A reason to head for the water', category: 'Outdoors', description: 'A $1,500 grant to Doc’s Place in Brunswick supported new surfboards for sober surfing. The idea is simple: help make an outdoor activity available as a way to spend time together in sobriety.' },
+];
 
-export function GrantStoryCard({ 
-  title, 
-  description, 
-  goodDays, 
-  costPerDay, 
-  image,
-  link 
-}: GrantStoryCardProps) {
-  const CardContent = (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-      {image && (
-        <div className="relative h-48">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-        </div>
-      )}
-      <div className="p-6">
-        <h3 className="text-xl font-bold mb-3 text-gray-900">
-          {title}
-        </h3>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          {description}
-        </p>
-        <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center space-x-4">
-            <div className="text-center">
-              <div className="text-2xl font-bold text-blue-600">
-                {formatNumber(goodDays)}
-              </div>
-              <div className="text-gray-500">estimated good days</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl font-bold text-green-600">
-                ${costPerDay}
-              </div>
-              <div className="text-gray-500">per day</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-
-  if (link) {
-    return (
-      <a href={link} target="_blank" rel="noopener noreferrer" className="block">
-        {CardContent}
-      </a>
-    );
-  }
-
-  return CardContent;
-}
-
-interface GrantStoryGridProps {
-  stories?: GrantStoryCardProps[] | GrantsData['top'];
-}
-
-export function GrantStoryGrid({ stories }: GrantStoryGridProps) {
-  const displayStories: GrantStoryCardProps[] = (stories || []).map(story => 'grantee' in story
-    ? { title: story.grantee, description: story.description, goodDays: story.goodDays, costPerDay: story.costPerGD }
-    : story);
-
+export function GrantStoryGrid({ grants }: { grants: GrantsData['rows'] }) {
+  const features = grantFeatures.filter(feature => grants.some(grant =>
+    grant.grantee === feature.grantee && grant.year === feature.year && grant.amount === feature.amount
+  ));
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {displayStories.map((story, index) => (
-        <GrantStoryCard key={index} {...story} />
+    <div className="grid grid-cols-1 gap-x-12 gap-y-10 md:grid-cols-2">
+      {features.map(feature => (
+        <article key={feature.grantee} className="border-t border-[#b9c9c1] pt-6">
+          <p className="eyebrow mb-4">{feature.category} · {feature.year} grant</p>
+          <h3 className="font-playfair text-3xl leading-tight mb-4">{feature.title}</h3>
+          <p className="text-slate-600 leading-relaxed mb-6">{feature.description}</p>
+          <div className="flex flex-wrap items-center justify-between gap-3 text-sm font-semibold">
+            <span>{feature.displayName || feature.grantee}</span>
+            <span>{formatCurrency(feature.amount)} awarded</span>
+          </div>
+        </article>
       ))}
     </div>
   );
