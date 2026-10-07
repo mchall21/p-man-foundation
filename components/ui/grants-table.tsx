@@ -20,7 +20,7 @@ export function GrantsTable({ grants }: GrantsTableProps) {
 
   // Get unique years and types for filters
   const availableYears = useMemo(() => {
-    const years = [...new Set(grants.map(g => g.year))].sort((a, b) => b - a);
+    const years = [...new Set(grants.map(g => g.year).filter((year): year is number => year !== null))].sort((a, b) => b - a);
     return years;
   }, [grants]);
 
@@ -32,7 +32,7 @@ export function GrantsTable({ grants }: GrantsTableProps) {
   // Filter and sort grants
   const filteredAndSortedGrants = useMemo(() => {
     const filtered = grants.filter(grant => {
-      const matchesYear = filterYear === 'all' || grant.year.toString() === filterYear;
+      const matchesYear = filterYear === 'all' || grant.year?.toString() === filterYear;
       const matchesType = filterType === 'all' || grant.granteeType === filterType;
       const matchesSearch = searchTerm === '' || 
         grant.grantee.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -43,8 +43,8 @@ export function GrantsTable({ grants }: GrantsTableProps) {
     });
 
     return filtered.sort((a, b) => {
-      let aVal: string | number = a[sortField];
-      let bVal: string | number = b[sortField];
+      let aVal: string | number = a[sortField] ?? -1;
+      let bVal: string | number = b[sortField] ?? -1;
 
       if (sortField === 'grantee') {
         aVal = (aVal as string).toLowerCase();
@@ -106,10 +106,11 @@ export function GrantsTable({ grants }: GrantsTableProps) {
         {/* Filters and Search */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="grant-search" className="block text-sm font-medium text-gray-700 mb-1">
               Search
             </label>
             <input
+              id="grant-search"
               type="text"
               placeholder="Search grantees, descriptions..."
               value={searchTerm}
@@ -119,10 +120,11 @@ export function GrantsTable({ grants }: GrantsTableProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="grant-year" className="block text-sm font-medium text-gray-700 mb-1">
               Year
             </label>
             <select
+              id="grant-year"
               value={filterYear}
               onChange={(e) => setFilterYear(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -135,10 +137,11 @@ export function GrantsTable({ grants }: GrantsTableProps) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="grant-type" className="block text-sm font-medium text-gray-700 mb-1">
               Grantee Type
             </label>
             <select
+              id="grant-type"
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -190,7 +193,7 @@ export function GrantsTable({ grants }: GrantsTableProps) {
                 return (
                   <tr key={index} className="hover:bg-gray-50 transition-colors">
                     <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {grant.year}
+                      {grant.year ?? "Not recorded"}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-900 font-semibold">
                       {formatCurrency(grant.amount)}

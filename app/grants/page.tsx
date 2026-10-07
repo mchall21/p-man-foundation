@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import type { Metadata } from 'next';
 import { EXTERNAL_LINKS } from '@/lib/constants';
 
 const faqs = [
@@ -11,7 +10,7 @@ const faqs = [
   },
   {
     question: "What's the typical grant size?",
-    answer: "Microgrants range from $500 to $5,000, with most awards between $3,000 and $5,000."
+    answer: "Our grants generally range from $500 to $5,000. In the 2026 award cycle, approved amounts ranged from $1,000 to $4,460."
   },
   {
     question: "What won't you fund?",
@@ -31,7 +30,7 @@ const faqs = [
   },
   {
     question: "When are funds disbursed?",
-    answer: "Grants are reviewed throughout the year and disbursed primarily in Spring."
+    answer: "Applications are reviewed throughout the year. Award and payment timing is coordinated with each recipient."
   },
   {
     question: "What are the reporting requirements?",
@@ -106,7 +105,7 @@ export default function GrantsPage() {
         <div className="bg-yellow-50 p-6 rounded-lg mb-8">
           <h3 className="text-lg font-bold mb-2">Timing</h3>
           <p>
-            Rolling submissions accepted year-round. Grants are <strong>reviewed and paid in Spring</strong>.
+            Rolling submissions accepted year-round. <strong>Award and payment timing is coordinated with each recipient.</strong>
           </p>
         </div>
       </div>

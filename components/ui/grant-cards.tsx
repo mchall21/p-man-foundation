@@ -46,7 +46,7 @@ export function GrantStoryCard({
               <div className="text-2xl font-bold text-blue-600">
                 {formatNumber(goodDays)}
               </div>
-              <div className="text-gray-500">good days</div>
+              <div className="text-gray-500">estimated good days</div>
             </div>
             <div className="text-center">
               <div className="text-2xl font-bold text-green-600">
@@ -76,67 +76,9 @@ interface GrantStoryGridProps {
 }
 
 export function GrantStoryGrid({ stories }: GrantStoryGridProps) {
-  // Helper function to find grant data by grantee name
-  const findGrantData = (grantee: string, liveData?: GrantsData['top']) => {
-    if (!liveData) return null;
-    return liveData.find(grant => 
-      grant.grantee.toLowerCase().includes(grantee.toLowerCase()) ||
-      grantee.toLowerCase().includes(grant.grantee.toLowerCase())
-    );
-  };
-
-  // Curated stories featuring specific organizations
-  const getCuratedStories = (liveData?: GrantsData['top']): GrantStoryCardProps[] => {
-    const surfingData = findGrantData("docs place", liveData);
-    const pickleballData = findGrantData("brainwashed", liveData);
-    const standupData = findGrantData("standup4recovery", liveData);
-    const nlbData = findGrantData("no longer bound", liveData);
-
-    return [
-      {
-        title: "Boards that bring people back.",
-        description: "Docs Place bought surf boards for their sober surfing group, helping members find peace and community in the waves.",
-        goodDays: surfingData?.goodDays || 360,
-        costPerDay: surfingData?.costPerGD || 4,
-        image: "/images/stories/surfboards.webp"
-      },
-      {
-        title: "Standing up for recovery.",
-        description: "StandUp4Recovery does stand-up comedy training and events. No more 2 drink minimums!",
-        goodDays: standupData?.goodDays || 480,
-        costPerDay: standupData?.costPerGD || 5,
-        image: "/images/stories/standup.jpeg"
-      },
-      {
-        title: "Pickleball made easy.",
-        description: "Brainwashed Coffee used funding to host sober pickleball sessions, creating a welcoming space for people in recovery to stay active and social.",
-        goodDays: pickleballData?.goodDays || 400,
-        costPerDay: pickleballData?.costPerGD || 3,
-        image: "/images/stories/pickleball.jpeg"
-      },
-      {
-        title: "From trails to Kilimanjaro.",
-        description: "No Longer Bound organizes hiking events every year and even sent a crew to summit Mt. Kilimanjaro, proving that recovery can take you to new heights.",
-        goodDays: nlbData?.goodDays || 520,
-        costPerDay: nlbData?.costPerGD || 6,
-        image: "/images/stories/hiking.webp"
-      }
-    ];
-  };
-
-  // Convert live grant data to story format if needed
-  let displayStories: GrantStoryCardProps[];
-  
-  if (!stories) {
-    displayStories = getCuratedStories();
-  } else if (Array.isArray(stories) && stories.length > 0 && 'grantee' in stories[0]) {
-    // Use curated stories but with live data where available
-    const liveStories = stories as GrantsData['top'];
-    displayStories = getCuratedStories(liveStories);
-  } else {
-    // Already in GrantStoryCardProps format
-    displayStories = stories as GrantStoryCardProps[];
-  }
+  const displayStories: GrantStoryCardProps[] = (stories || []).map(story => 'grantee' in story
+    ? { title: story.grantee, description: story.description, goodDays: story.goodDays, costPerDay: story.costPerGD }
+    : story);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -166,6 +108,7 @@ export function GrantDetailModal({ grant, isOpen, onClose }: GrantDetailModalPro
             </h2>
             <button
               onClick={onClose}
+              aria-label="Close grant details"
               className="text-gray-400 hover:text-gray-600 text-2xl"
             >
               ×
@@ -182,7 +125,7 @@ export function GrantDetailModal({ grant, isOpen, onClose }: GrantDetailModalPro
                 <div className="text-2xl font-bold text-blue-600">
                   {formatNumber(grant.goodDays)}
                 </div>
-                <div className="text-sm text-gray-600">Good Days</div>
+                <div className="text-sm text-gray-600">Estimated Good Days</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-green-600">
@@ -202,6 +145,7 @@ export function GrantDetailModal({ grant, isOpen, onClose }: GrantDetailModalPro
           <div className="mt-6 flex justify-end">
             <button
               onClick={onClose}
+              aria-label="Close grant details"
               className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
             >
               Close

@@ -5,13 +5,14 @@ import Navigation from "@/components/layout/Navigation";
 import Footer from "@/components/layout/Footer";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ 
   subsets: ["latin"],
   variable: '--font-playfair'
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_CONFIG.url),
   title: {
     default: SITE_CONFIG.name,
     template: `%s | ${SITE_CONFIG.name}`,
@@ -26,6 +27,7 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.name,
     locale: "en_US",
     type: "website",
+    images: [{ url: "/images/2025/pedal-2025-161.webp", width: 2200, height: 1238, alt: "The community at the 2025 Pedal for P-Man ride" }],
   },
 };
 
@@ -36,9 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${playfair.variable} antialiased min-h-screen flex flex-col`}>
+      <body className={`${inter.className} ${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col`}>
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:p-3">Skip to content</a>
         <Navigation />
-        <main className="flex-grow">
+        <main id="main-content" className="flex-grow">
           {children}
         </main>
         <Footer />

@@ -1,7 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { animateNumber, formatCurrency, formatNumber } from '@/lib/utils';
+import { formatCurrency, formatNumber } from '@/lib/utils';
 
 interface AnimatedCounterProps {
   value: number;
@@ -13,55 +12,10 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({ 
-  value, 
-  format = 'number',
-  decimals = 0,
-  duration = 2000,
-  prefix = '',
-  suffix = '',
-  className = ''
-}: AnimatedCounterProps) {
-  const [displayValue, setDisplayValue] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const counterRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          animateNumber(0, value, duration, setDisplayValue);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [value, duration, hasAnimated]);
-
-  const formatValue = (val: number): string => {
-    switch (format) {
-      case 'currency':
-        return formatCurrency(val);
-      case 'decimal':
-        return val.toFixed(decimals);
-      case 'number':
-      default:
-        return formatNumber(val);
-    }
-  };
-
-  return (
-    <span ref={counterRef} className={className}>
-      {prefix}{formatValue(displayValue)}{suffix}
-    </span>
-  );
+export function AnimatedCounter({ value, format = 'number', decimals = 0, prefix = '', suffix = '', className = '' }: AnimatedCounterProps) {
+  // Render the actual figure immediately, including for reduced-motion users.
+  const formatted = format === 'currency' ? formatCurrency(value) : format === 'decimal' ? value.toFixed(decimals) : formatNumber(value);
+  return <span className={className}>{prefix}{formatted}{suffix}</span>;
 }
 
 interface MetricCounterProps {

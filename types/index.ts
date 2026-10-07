@@ -55,11 +55,11 @@ export interface ProcessedGrant {
   grantee: string;
   date: string;
   amount: number;
-  year: number;
+  year: number | null;
   participants?: number;
   days?: number;
-  goodDays: number;
-  costPerGD: number;
+  goodDays: number | null;
+  costPerGD: number | null;
   tags: string[];
   description?: string;
   location?: string;
@@ -68,34 +68,14 @@ export interface ProcessedGrant {
 }
 
 export interface GrantsData {
+  /** When the source was fetched, not when its contents were edited. */
   updatedAt: string;
-  totals: {
-    dollars: number;
-    goodDays: number;
-    costPerGD: number;
-  };
-  byYear: Array<{
-    year: number;
-    dollars: number;
-    goodDays: number;
-  }>;
-  byTag: Array<{
-    tag: string;
-    dollars: number;
-    goodDays: number;
-  }>;
-  top: Array<{
-    grantee: string;
-    goodDays: number;
-    costPerGD: number;
-    description: string;
-    amount: number;
-  }>;
-  costStats: {
-    min: number;
-    median: number;
-    max: number;
-  };
+  totals: { dollars: number; goodDays: number; costPerGD: number | null; awards: number; uniqueRecipients: number };
+  coverage: { estimatedAwards: number; pendingAwards: number; estimatedDollars: number };
+  byYear: Array<{ year: number | null; dollars: number; goodDays: number; awards: number; estimatedAwards: number }>;
+  byTag: Array<{ tag: string; dollars: number; goodDays: number }>;
+  top: Array<{ grantee: string; goodDays: number; costPerGD: number; description: string; amount: number }>;
+  costStats: { min: number | null; median: number | null; max: number | null };
   rows: ProcessedGrant[];
 }
 

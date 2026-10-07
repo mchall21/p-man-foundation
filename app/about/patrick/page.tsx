@@ -84,7 +84,7 @@ export default function PatrickStoryPage() {
         <p className="mb-8">
           The annual Pedal for P-Man ride began as a way to honor Patrick&apos;s memory and continue his mission. 
           What started as a small group of friends cycling through Atlanta has grown into a movement that funds 
-          dozens of grants each year, creating opportunities for people in recovery to have one more good day.
+          grants each year, creating opportunities for people in recovery to have one more good day.
         </p>
 
         <hr className="my-12 border-gray-300" />

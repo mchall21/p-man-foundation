@@ -1,124 +1,53 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { EXTERNAL_LINKS } from '@/lib/constants';
-import { CyclingHero } from '@/components/ui/cycling-hero';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { ImpactSummary } from '@/components/ui/impact-summary';
+import { RideRecap } from '@/components/ui/ride-recap';
+import { pedal2025Hero, pedal2025Group } from '@/lib/media-2025';
 
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
-      <CyclingHero>
-        <div className="text-center text-white px-4">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-playfair mb-6">
-            One more good day.
-          </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-8">
-            We fund small, practical grants that create sober social activities. 
-            String enough of those together and you change a life.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href={EXTERNAL_LINKS.paypal}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-blue-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors"
-            >
-              Donate
-            </Link>
-            <Link
-              href="/grants"
-              className="bg-green-600 text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors"
-            >
-              Apply
-            </Link>
+      <section className="page-shell grid gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16 lg:py-20">
+        <div>
+          <p className="eyebrow mb-7">In Patrick’s memory. For a life in recovery.</p>
+          <h1 className="font-playfair text-6xl leading-[1.02] tracking-tight sm:text-7xl lg:text-8xl">One more<br />good day<span className="text-amber-600">.</span></h1>
+          <p className="mt-7 max-w-lg text-lg leading-relaxed text-slate-600">A bike ride. A shared meal. A day outside with friends. We fund the small things that help people in recovery build a life full of connection.</p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link href="/donate" className="button-primary">Help create a good day <ArrowUpRight size={18} /></Link>
+            <Link href="/about/patrick" className="button-secondary">Meet Patrick <ArrowRight size={18} /></Link>
           </div>
+          <p className="mt-7 text-sm text-slate-600">100% of donations go to grants.</p>
         </div>
-      </CyclingHero>
-
-      {/* Impact Summary */}
+        <figure className="relative">
+          <div className="relative h-[360px] overflow-hidden rounded-[2rem] sm:h-[490px] lg:h-[580px]">
+            <Image src={pedal2025Hero.src} alt={pedal2025Hero.alt} fill priority sizes="(max-width: 1024px) 100vw, 55vw" className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            <figcaption className="absolute bottom-7 left-7 text-sm text-white"><span className="block text-xs uppercase tracking-[.2em] text-white/80">Atlanta, Georgia</span><span className="mt-2 block font-medium">A good day together. Pedal for P-Man, 2025.</span></figcaption>
+          </div>
+        </figure>
+      </section>
+      <div className="bg-[#e9e5da]">
+        <Link href="/pedal" className="page-shell flex flex-wrap items-center justify-between gap-4 py-6">
+          <span className="text-lg"><span className="font-semibold">Let’s ride again.</span> November 14, 2026 · Grant Park, Atlanta</span>
+          <span className="inline-flex items-center gap-3 font-semibold">The 11th annual ride <ArrowRight size={19} /></span>
+        </Link>
+      </div>
       <ImpactSummary />
-
-      {/* 100% Message */}
-      <section className="bg-gray-50 py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold font-playfair mb-4">100% of donations go to grants</h2>
-          <p className="text-lg text-gray-700">
-            Our annual ride funds itself via tickets, ensuring every dollar you donate 
-            directly supports sober social activities in our communities.
-          </p>
+      <section className="page-shell grid gap-10 py-20 md:grid-cols-2 md:items-center lg:gap-24">
+        <div className="relative h-[360px] overflow-hidden rounded-2xl md:h-[430px]">
+          <Image src={pedal2025Group.src} alt={pedal2025Group.alt} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+        </div>
+        <div>
+          <p className="eyebrow mb-5">Small grants. Real connection.</p>
+          <h2 className="section-heading">Recovery needs<br />community.</h2>
+          <p className="mt-6 text-lg leading-relaxed text-slate-600">Getting through today is easier when there’s something to look forward to. Our grants help make sober social activities accessible—from outdoor adventures to art, fitness, and simply spending time together.</p>
+          <Link href="/impact" className="mt-7 inline-flex items-center gap-3 font-semibold text-blue-700">See what your support makes possible <ArrowRight size={18} /></Link>
+          <div className="mt-8 border-t border-slate-200 pt-6"><p className="text-sm text-slate-600">Have an idea for your community?</p><Link href="/grants" className="mt-2 inline-block font-semibold underline underline-offset-4">Explore our grants</Link></div>
         </div>
       </section>
-
-      {/* Feature Tiles */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Link href="/about/patrick" className="group">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48">
-                  <Image
-                    src="/images/patrick-bike.webp"
-                    alt="Patrick on his bike"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-playfair mb-2 group-hover:text-blue-600 transition-colors">
-                    Patrick&apos;s Story
-                  </h3>
-                  <p className="text-gray-600">
-                    Learn about Patrick and the meaning behind "one more good day."
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/grants" className="group">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48">
-                  <Image
-                    src="/images/ride-photos/2018/event-photo-1.jpg"
-                    alt="Grant recipients enjoying activities"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-playfair mb-2 group-hover:text-blue-600 transition-colors">
-                    Our Grants
-                  </h3>
-                  <p className="text-gray-600">
-                    See how microgrants create lasting impact in recovery communities.
-                  </p>
-                </div>
-              </div>
-            </Link>
-
-            <Link href="/pedal" className="group">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48">
-                  <Image
-                    src="/images/ride-photos/2016/group-photo-1.jpg"
-                    alt="Pedal for P-Man cyclists"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-playfair mb-2 group-hover:text-blue-600 transition-colors">
-                    Pedal for P-Man
-                  </h3>
-                  <p className="text-gray-600">
-                    Join our annual ride and be part of the movement.
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <section className="bg-[#e9e5da] py-16 md:py-20"><div className="page-shell"><RideRecap /></div></section>
+      <section className="page-shell py-20 text-center"><p className="eyebrow mb-5">Keep the good days going</p><h2 className="section-heading">A little support.<br />Something to look forward to.</h2><p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-slate-600">Donate, join the ride, or bring a sober social activity to your community. There’s a place for you here.</p><div className="mt-8 flex flex-wrap justify-center gap-3"><Link href="/donate" className="button-primary">Make a donation <ArrowUpRight size={18} /></Link><Link href="/pedal" className="button-secondary">Join the ride <ArrowRight size={18} /></Link></div></section>
     </>
   );
 }

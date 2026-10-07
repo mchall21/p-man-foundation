@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { pedal2025Group } from '@/lib/media-2025';
 
 interface YearData {
   year: number;
@@ -64,8 +66,8 @@ const timelineData: YearData[] = [
   },
   {
     year: 2021,
-    title: "Grants Begin",
-    description: "We launched our first formal grant program, funding impactful projects. Participants began seeing the direct impact of their support.",
+    title: "Supporting Recovery",
+    description: "Our grants supported sober bike rides, outdoor activities, and community gatherings. The ride helped connect supporters with the work they made possible.",
     tshirt: "/images/pedal-history/tshirts/2021_Shirt.png"
   },
   {
@@ -106,6 +108,10 @@ export default function PedalHistoryPage() {
         </p>
       </div>
 
+      <section className="mb-16 grid gap-8 rounded-2xl bg-[#e9e5da] p-6 md:grid-cols-2 md:items-center md:p-10">
+        <Image src={pedal2025Group.src} alt={pedal2025Group.alt} width={700} height={470} className="h-72 w-full rounded-xl object-cover" />
+        <div><p className="eyebrow mb-4">2025 · Our tenth ride</p><h2 className="section-heading">Ten years of showing up.</h2><p className="my-6 text-lg text-slate-600">Another day on bikes, another chance to gather in Patrick’s memory. Revisit the 2025 ride in photos and film.</p><Link href="/pedal/2025" className="button-primary">See the 2025 photos & film →</Link></div>
+      </section>
       {/* What Makes It Special */}
       <div className="bg-blue-50 p-8 rounded-lg mb-16">
         <h2 className="text-2xl font-bold mb-6 text-center">What People Love About Pedal for P-Man</h2>
