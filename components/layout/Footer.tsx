@@ -29,6 +29,7 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li><Link href="/pedal/history" className="text-gray-300 hover:text-white transition-colors">Ride history &amp; photos</Link></li>
             </ul>
           </div>
 

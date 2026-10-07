@@ -1,260 +1,73 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { pedal2025Group } from '@/lib/media-2025';
+import type { Metadata } from 'next';
+import { pedal2025Photos } from '@/lib/media-2025';
 
-interface YearData {
-  year: number;
-  title: string;
-  description: string;
-  tshirt: string;
-  photos?: string[];
-}
+export const metadata: Metadata = {
+  title: 'Ride History — The Shirts & the Memories',
+  description: 'Explore the Pedal for P-Man shirts and photographs, year by year, from the first ride in 2016 to our tenth ride in 2025.',
+};
 
-const timelineData: YearData[] = [
-  {
-    year: 2016,
-    title: "A Day of Remembrance",
-    description: "It started simple—friends and family on the Atlanta Beltline, honoring Patrick's memory through something he loved: riding bikes.",
-    tshirt: "/images/pedal-history/tshirts/2016_Shirt.png",
-    photos: [
-      "/images/pedal-history/photos/2016_photo.jpg",
-      "/images/pedal-history/photos/2016_photo2.jpg",
-      "/images/pedal-history/photos/2016_photo3.jpg"
-    ]
-  },
-  {
-    year: 2017,
-    title: "Growing Community",
-    description: "Word spread. More people joined. We saw the power of bringing people together for remembrance and connection.",
-    tshirt: "/images/pedal-history/tshirts/2017_Shirt.png",
-    photos: [
-      "/images/pedal-history/photos/2017_photo.jpg",
-      "/images/pedal-history/photos/2017_photo2.jpg",
-      "/images/pedal-history/photos/2017_photo3.jpg"
-    ]
-  },
-  {
-    year: 2018,
-    title: "Becoming a Movement",
-    description: "Pedal for P-Man evolved beyond remembrance—it became a fundraising engine and a movement for recovery communities.",
-    tshirt: "/images/pedal-history/tshirts/2018_Shirt.png",
-    photos: [
-      "/images/pedal-history/photos/2018_photo.jpg",
-      "/images/pedal-history/photos/2018_photo2.jpg",
-      "/images/pedal-history/photos/2018_photo3.jpg"
-    ]
-  },
-  {
-    year: 2019,
-    title: "Finding Our Mission",
-    description: "We understood our unique role: funding practical, sober social activities that help people build 'one more good day' in recovery.",
-    tshirt: "/images/pedal-history/tshirts/2019_Shirt.png",
-    photos: [
-      "/images/pedal-history/photos/2019_photo.jpg",
-      "/images/pedal-history/photos/2019_photo2.jpg",
-      "/images/pedal-history/photos/2019_photo3.jpg"
-    ]
-  },
-  {
-    year: 2020,
-    title: "Adapting & Persevering",
-    description: "Even in challenging times, our community showed resilience, adapting while maintaining our commitment to recovery support.",
-    tshirt: "/images/pedal-history/tshirts/2020_Shirt.png"
-  },
-  {
-    year: 2021,
-    title: "Supporting Recovery",
-    description: "Our grants supported sober bike rides, outdoor activities, and community gatherings. The ride helped connect supporters with the work they made possible.",
-    tshirt: "/images/pedal-history/tshirts/2021_Shirt.png"
-  },
-  {
-    year: 2022,
-    title: "Expanding Reach",
-    description: "Our grant program grew, supporting more organizations and reaching more people. The ride celebrated both memory and impact.",
-    tshirt: "/images/pedal-history/tshirts/2022_Shirt.png"
-  },
-  {
-    year: 2023,
-    title: "Celebrating Success",
-    description: "With proven grant effectiveness, participants could see real difference. Success stories became central to our gathering.",
-    tshirt: "/images/pedal-history/tshirts/2023_Shirt.png"
-  },
-  {
-    year: 2024,
-    title: "A True Movement",
-    description: "More than an event—a movement bringing together community, purpose, and impact. The best parts: community support, seeing grants work, remembering Patrick, and being kids again on bikes.",
-    tshirt: "/images/pedal-history/tshirts/2024_Shirt.png",
-    photos: [
-      "/images/pedal-history/photos/2024_photo.jpg",
-      "/images/pedal-history/photos/2024_photo2.jpg",
-      "/images/pedal-history/photos/2024_photo3.jpg"
-    ]
-  }
+const years = [
+  { year: 2016, title: 'The first ride', description: 'Friends and family came together on the Atlanta Beltline to remember Patrick through something he loved: riding bikes.', photos: true },
+  { year: 2017, title: 'Back on our bikes', description: 'A new shirt for another year of Pedal for P-Man.', photos: true },
+  { year: 2018, title: 'A year in red', description: 'The 2018 design brought a bright new color to the collection.', photos: true },
+  { year: 2019, title: 'Number 85', description: 'A shirt with a nod to Patrick’s birth year, and a reminder to choose health.', photos: true },
+  { year: 2020, title: 'One more good day', description: 'A familiar message, carried into another year.' },
+  { year: 2021, title: 'Chicago colors', description: 'The 2021 long-sleeve design featured the stars and stripes of the Chicago flag.' },
+  { year: 2022, title: 'A different spin', description: 'A wheel-inspired design in green joined the collection.' },
+  { year: 2023, title: 'Ride with heart', description: 'A heart on the front. Pedal for P-Man on the back.' },
+  { year: 2024, title: 'The ninth ride', description: 'Another shirt, another gathering, and more memories made together.', photos: true },
 ];
 
 export default function PedalHistoryPage() {
-  const [selectedGallery, setSelectedGallery] = useState<YearData | null>(null);
-
   return (
-    <div className="max-w-7xl mx-auto px-4 py-16">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-6">Pedal for P-Man: A Timeline</h1>
-        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          From a day of remembrance on the Beltline to a fundraising engine and movement, 
-          discover how Pedal for P-Man has grown while staying true to its heart.
-        </p>
-      </div>
-
-      <section className="mb-16 grid gap-8 rounded-2xl bg-[#e9e5da] p-6 md:grid-cols-2 md:items-center md:p-10">
-        <Image src={pedal2025Group.src} alt={pedal2025Group.alt} width={700} height={470} className="h-72 w-full rounded-xl object-cover" />
-        <div><p className="eyebrow mb-4">2025 · Our tenth ride</p><h2 className="section-heading">Ten years of showing up.</h2><p className="my-6 text-lg text-slate-600">Another day on bikes, another chance to gather in Patrick’s memory. Revisit the 2025 ride in photos and film.</p><Link href="/pedal/2025" className="button-primary">See the 2025 photos & film →</Link></div>
-      </section>
-      {/* What Makes It Special */}
-      <div className="bg-blue-50 p-8 rounded-lg mb-16">
-        <h2 className="text-2xl font-bold mb-6 text-center">What People Love About Pedal for P-Man</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Community & Support</h3>
-            <p className="text-gray-700">Connecting with others who understand the journey and share the mission.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Mission & Purpose</h3>
-            <p className="text-gray-700">Being part of something meaningful that creates real change in recovery communities.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Seeing Grant Impact</h3>
-            <p className="text-gray-700">Witnessing firsthand how contributions transform lives and strengthen communities.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Remembering Patrick</h3>
-            <p className="text-gray-700">Honoring his memory while celebrating the hope and healing he would have wanted.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Being a Kid Again</h3>
-            <p className="text-gray-700">The pure joy of riding bikes together, laughing, and embracing playfulness.</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm">
-            <h3 className="font-bold text-lg mb-2 text-blue-600">Sober Connection</h3>
-            <p className="text-gray-700">Building meaningful relationships in a supportive, substance-free environment.</p>
-          </div>
-        </div>
-      </div>
-
-      {/* T-Shirt Focused Timeline */}
-      <div className="relative mb-16">
-        <h2 className="text-3xl font-bold mb-8 text-center">The Journey Through T-Shirts</h2>
-        
-        {/* Scroll container */}
-        <div className="overflow-x-auto pb-6">
-          <div className="flex space-x-8 min-w-max px-4">
-            {timelineData.map((yearData, index) => (
-              <div key={yearData.year} className="flex-shrink-0 w-80">
-                {/* Year marker */}
-                <div className="text-center mb-4">
-                  <div className="inline-block bg-blue-600 text-white px-6 py-2 rounded-full font-bold text-lg">
-                    {yearData.year}
-                  </div>
-                </div>
-                
-                {/* Card with T-shirt focus */}
-                <div className="bg-white rounded-lg shadow-lg border border-gray-200 p-6 h-[500px] flex flex-col">
-                  {/* Large T-shirt Image */}
-                  <div className="relative mb-4 bg-gray-50 rounded-lg p-4 flex-shrink-0">
-                    <Image
-                      src={yearData.tshirt}
-                      alt={`${yearData.year} t-shirt design`}
-                      width={200}
-                      height={160}
-                      className="w-full h-40 object-contain"
-                    />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold mb-3 text-blue-600">{yearData.title}</h3>
-                  <p className="text-gray-700 text-sm leading-relaxed flex-grow">{yearData.description}</p>
-                  
-                  {/* Photo Gallery Button */}
-                  {yearData.photos && yearData.photos.length > 0 && (
-                    <button
-                      onClick={() => setSelectedGallery(yearData)}
-                      className="mt-4 bg-blue-100 hover:bg-blue-200 text-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-colors flex items-center justify-center space-x-2"
-                    >
-                      <span>📸</span>
-                      <span>Click to Reminisce</span>
-                    </button>
-                  )}
-                </div>
+    <div className="page-shell py-12 md:py-20">
+      <Link href="/pedal" className="text-sm font-semibold underline underline-offset-4">← This year’s ride</Link>
+      <header className="mt-10 mb-10 max-w-3xl">
+        <p className="eyebrow mb-5">Pedal for P-Man · Since 2016</p>
+        <h1 className="section-heading">The shirts.<br />The rides. The memories.</h1>
+        <p className="mt-6 text-lg leading-relaxed text-slate-600">Every shirt brings back a year. Since our first ride in Patrick’s memory, we’ve gathered on bikes, made new memories, and kept coming back. Here’s the collection, with photos from along the way.</p>
+      </header>
+      <nav aria-label="Jump to a ride year" className="mb-14 flex flex-wrap gap-2 border-y border-slate-200 py-5">
+        {[...years.map(({ year }) => year), 2025].map(year => <a key={year} href={`#ride-${year}`} className="rounded-full border border-slate-300 px-4 py-2 text-sm font-semibold hover:bg-blue-100">{year}</a>)}
+      </nav>
+      <div className="space-y-16 md:space-y-24">
+        {years.map(({ year, title, description, photos }) => (
+          <section key={year} id={`ride-${year}`} aria-labelledby={`heading-${year}`} className="scroll-mt-28 border-t border-[#c7cfcd] pt-8">
+            <div className="grid items-center gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
+              <div>
+                <p className="font-playfair text-6xl text-[#3d6757] md:text-7xl">{year}</p>
+                <h2 id={`heading-${year}`} className="mt-4 font-playfair text-3xl">{title}</h2>
+                <p className="mt-4 max-w-sm leading-relaxed text-slate-600">{description}</p>
               </div>
-            ))}
-          </div>
-        </div>
-        
-        {/* Scroll hint */}
-        <div className="text-center text-gray-500 text-sm mt-4">
-          ← Scroll to see our journey through the years →
-        </div>
-      </div>
-
-      {/* Photo Gallery Modal */}
-      {selectedGallery && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-4xl w-full max-h-[80vh] overflow-y-auto">
-            <div className="p-6">
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-blue-600">
-                  {selectedGallery.year} - {selectedGallery.title}
-                </h3>
-                <button
-                  onClick={() => setSelectedGallery(null)}
-                  className="text-gray-500 hover:text-gray-700 text-2xl"
-                >
-                  ×
-                </button>
-              </div>
-              
-              {/* Photo Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {selectedGallery.photos?.map((photo, index) => (
-                  <div key={index} className="relative">
-                    <Image
-                      src={photo}
-                      alt={`${selectedGallery.year} photo ${index + 1}`}
-                      width={300}
-                      height={200}
-                      className="w-full h-48 object-cover rounded-lg"
-                    />
-                  </div>
-                ))}
-              </div>
+              <figure className="overflow-hidden rounded-2xl bg-[#e9e5da] p-3 sm:p-6">
+                <Image src={`/images/pedal-history/tshirts/${year}_Shirt.png`} alt={`${year} Pedal for P-Man shirt, front and back`} width={900} height={450} sizes="(max-width: 768px) 100vw, 800px" className="h-auto w-full object-contain" />
+                <figcaption className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-600">The {year} shirt</figcaption>
+              </figure>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Call to action */}
-      <div className="bg-blue-600 text-white p-8 rounded-lg text-center">
-        <h2 className="text-2xl font-bold mb-4">Be Part of the Story</h2>
-        <p className="mb-6 text-lg">
-          Join us for the next chapter of Pedal for P-Man and help us continue building 
-          one more good day for people in recovery.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="/pedal"
-            className="bg-white text-blue-600 px-6 py-3 rounded-md font-semibold hover:bg-gray-100 transition-colors"
-          >
-            Join This Year's Ride
-          </a>
-          <a
-            href="/grants"
-            className="border-2 border-white text-white px-6 py-3 rounded-md font-semibold hover:bg-white hover:text-blue-600 transition-colors"
-          >
-            Learn About Our Grants
-          </a>
-        </div>
+            {photos && <div className="mt-8 grid gap-4 sm:grid-cols-3">
+              {[1, 2, 3].map(index => (
+                <figure key={index} className="overflow-hidden rounded-xl bg-[#e9e5da]">
+                  <Image src={`/images/pedal-history/photos/${year}_photo${index === 1 ? '' : index}.jpg`} alt={`From the ${year} Pedal for P-Man photo collection, photograph ${index}`} width={700} height={525} sizes="(max-width: 640px) 100vw, 33vw" className="aspect-[4/3] w-full object-contain" />
+                </figure>
+              ))}
+            </div>}
+          </section>
+        ))}
+        <section id="ride-2025" aria-labelledby="heading-2025" className="scroll-mt-28 border-t border-[#c7cfcd] pt-8">
+          <p className="font-playfair text-6xl text-[#3d6757] md:text-7xl">2025</p>
+          <h2 id="heading-2025" className="mt-4 font-playfair text-3xl">Ten years of showing up.</h2>
+          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">The tenth annual ride brought us together again. Familiar faces, new friends, and one more day to remember Patrick.</p>
+          <div className="my-8 grid gap-4 sm:grid-cols-3">{[pedal2025Photos[11], pedal2025Photos[0], pedal2025Photos[1]].map(photo => <Image key={photo.src} src={photo.src} alt={photo.alt} width={700} height={525} sizes="(max-width: 640px) 100vw, 33vw" className="aspect-[4/3] w-full rounded-xl object-cover" />)}</div>
+          <Link href="/pedal/2025" className="button-secondary">More 2025 photos &amp; the film →</Link>
+        </section>
       </div>
+      <section className="mt-20 rounded-2xl bg-blue-700 p-8 text-white md:p-12">
+        <p className="text-sm font-semibold uppercase tracking-widest text-white/70">The next chapter</p>
+        <h2 className="mt-4 font-playfair text-4xl">Make another memory with us.</h2>
+        <div className="mt-8 flex flex-wrap gap-4"><Link href="/pedal" className="rounded-md bg-white px-6 py-3 font-semibold text-blue-700">The 2026 ride →</Link><Link href="/about/patrick" className="px-2 py-3 font-semibold underline underline-offset-4">Remembering Patrick</Link></div>
+      </section>
     </div>
   );
 }

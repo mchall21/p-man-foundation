@@ -57,3 +57,7 @@ Replaced the Drive iframe with a native HTML5 player and a 40 MB, 720p H.264/AAC
 Replaced the automatically ranked spreadsheet cards with four editorial summaries matched to specific historical awards (organization, year, amount). Copy describes funded activities, not measured outcomes or participant testimonials. Uses the 2025 No Longer Bound equipment award, 2022 Hickey House equipment award, 2024 Brainwashed Coffee pickleball award, and 2021 Doc’s Place surfing award.
 
 Validation: scoped ESLint, TypeScript, desktop/mobile layout and native video playback. No source sharing permissions changed. Supplied film has no caption track; a reviewed transcript/caption file is still needed.
+
+## Ride history refresh
+
+Rebuilt the history page as a chronological, shirt-led archive. All nine 2016–2024 shirt designs and 15 existing historical photos are visible inline, with year anchors and a 2025 photo row linking to the full gallery and film. Removed the carousel and photo modal. Added a shared illustrated history feature on the ride and Patrick story pages, plus a footer archive link. Desktop and 390px browser checks verified layout, year-anchor positioning, and entry links; scoped ESLint and TypeScript passed.
