@@ -38,5 +38,14 @@ Historical estimated good days remain 6,921. After import, coverage should be 63
 
 - Editor access and verified 2026 import.
 - Confirm current 2026 registration URL, if registration is open.
-- Confirm video playback and caption availability.
-- Preview review. Do not merge to production until requested.
+- Video playback verified in the embedded Drive player. Its closed-caption control is disabled; a caption track is still needed.
+- Preview review. Vercel build passed for the preview. The connected Vercel account lacks access to this project/team, so remote browser verification remains blocked by SSO; local desktop/mobile checks passed. Do not merge to production until requested.
+
+## Validation
+
+- Three focused grant-data regression tests passed.
+- Canonical CSV reconciles to 63 awards / $127,101 / 6,921 estimated good days.
+- TypeScript and scoped ESLint passed; Vercel preview build passed.
+- Homepage and Impact render at 390px without page overflow; main mobile navigation opens.
+- Photo gallery and 2026 ride page render; embedded video reaches playing state.
+- Simulated grant-network failure renders unavailable copy instead of fake data or a permanent skeleton.
