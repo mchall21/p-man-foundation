@@ -61,3 +61,7 @@ Validation: scoped ESLint, TypeScript, desktop/mobile layout and native video pl
 ## Ride history refresh
 
 Rebuilt the history page as a chronological, shirt-led archive. All nine 2016–2024 shirt designs and 15 existing historical photos are visible inline, with year anchors and a 2025 photo row linking to the full gallery and film. Removed the carousel and photo modal. Added a shared illustrated history feature on the ride and Patrick story pages, plus a footer archive link. Desktop and 390px browser checks verified layout, year-anchor positioning, and entry links; scoped ESLint and TypeScript passed.
+
+## Shirt design context
+
+Matthew supplied and confirmed the design references: 2017 Outkast, 2018 Atlanta skyline, 2019 Mike Ditka/Chicago Bears, 2020 COVID, 2021 Chicago flag, 2022 Irish roots, 2023 Troy’s Decide brand, 2024 Peachtree Road Race, and 2025 One More Good Day/tenth anniversary. Added Audrey’s credit (Patrick’s sister-in-law), with the 2023 heart design exception. Intro now explains that most years capture something important to Patrick.
