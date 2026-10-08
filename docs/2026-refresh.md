@@ -71,3 +71,9 @@ Matthew supplied and confirmed the design references: 2017 Outkast, 2018 Atlanta
 Added the approved Eventbrite copy, 9:30 AM arrival, 10 AM speakers/grantee panel, 10:30 AM kids’ ride, 11 AM adult ride, and noon lunch/socializing. Added Grant Park pavilion and parking details, ticket links on the ride page and homepage, and replaced the old Eventbrite constant. All new event copy avoids em dashes.
 
 Added a navy/cream bicycle favicon matching the Lucide header mark, with SVG, multi-size ICO, and Apple touch icon. Verified rendered icon metadata, local icon delivery, ticket destinations, all schedule times, and desktop/390px layouts. Scoped ESLint and TypeScript passed. Eventbrite blocked the automated page read; the ticket URL and copy were supplied and confirmed by Matthew.
+
+## Content preservation review
+
+Compared the refresh against origin/main after Matthew flagged lost content. Restored a prominent Patrick photo/story feature, the full explanation of ticket-funded event costs and 100% of donations going to grants, and all three older community photographs on the homepage. Restored desktop mission navigation and a ride-page mission link; fixed the footer’s pre-existing /about link to the actual Patrick page. The refreshed inline shirt/photo archive and approved design captions remain.
+
+Patrick’s full story and the foundation’s mission, values, and background were retained. Grant application FAQs remain, with updated award/timing details. Kept corrections removing unsupported donation-to-outcome price examples, mock grant totals, and promises of an unavailable per-mile pledge product. The former rotating community hero is now a visible photo collection, preserving the images alongside the new 2025 hero. Verified 1024px desktop and 390px mobile layouts and restored content visibility; scoped lint passed.

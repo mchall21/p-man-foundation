@@ -16,7 +16,7 @@ export const SITE_CONFIG = {
 export const NAVIGATION: NavigationItem[] = [
   {
     label: 'About',
-    href: '/about',
+    href: '/about/patrick',
     children: [
       { label: "Patrick's Story", href: '/about/patrick' },
       { label: 'Foundation & Mission', href: '/about/foundation' }
