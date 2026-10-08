@@ -69,31 +69,10 @@ export default function DonatePage() {
         </p>
       </div>
 
-      {/* Impact Reminder */}
       <div className="bg-green-50 p-8 rounded-lg mb-12">
-        <h3 className="text-2xl font-bold mb-4">Your Impact</h3>
-        <div className="space-y-3">
-          <div className="flex items-start">
-            <span className="text-green-600 font-bold mr-3">$50</span>
-            <span>Funds supplies for a sober game night</span>
-          </div>
-          <div className="flex items-start">
-            <span className="text-green-600 font-bold mr-3">$250</span>
-            <span>Sponsors a month of recovery yoga classes</span>
-          </div>
-          <div className="flex items-start">
-            <span className="text-green-600 font-bold mr-3">$500</span>
-            <span>Launches a sober hiking group with gear</span>
-          </div>
-          <div className="flex items-start">
-            <span className="text-green-600 font-bold mr-3">$1,000</span>
-            <span>Creates a season of sober softball</span>
-          </div>
-          <div className="flex items-start">
-            <span className="text-green-600 font-bold mr-3">$5,000</span>
-            <span>Funds a year-long community program</span>
-          </div>
-        </div>
+        <h3 className="text-2xl font-bold mb-4">Small grants create opportunities</h3>
+        <p className="text-lg text-gray-700">Your support helps fund outdoor adventures, creative activities, fitness, and community gatherings. Explore the grant log to see the awards behind the work.</p>
+        <a href="/impact" className="mt-5 inline-block font-semibold underline underline-offset-4">See our grants and impact →</a>
       </div>
 
       {/* Other Ways to Give */}
@@ -112,10 +91,10 @@ export default function DonatePage() {
           <div>
             <h4 className="font-bold mb-2">Pledge-to-Ride</h4>
             <p className="text-gray-700 mb-3">
-              Pledge a dollar amount per mile ridden in November.
+              Per-mile pledges are not currently available. Explore other ways to support the ride.
             </p>
             <a href="/pedal/pledge" className="text-blue-600 hover:underline">
-              Start a pledge →
+              Ways to support →
             </a>
           </div>
           <div>

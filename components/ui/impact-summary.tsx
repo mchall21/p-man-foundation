@@ -12,7 +12,7 @@ export function ImpactSummary() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/grants');
+        const response = await fetch('/api/grants', { signal: AbortSignal.timeout(20000) });
         if (response.ok) {
           const result = await response.json();
           setData(result);
@@ -27,7 +27,7 @@ export function ImpactSummary() {
     fetchData();
   }, []);
 
-  if (loading || !data) {
+  if (loading) {
     return (
       <section className="bg-blue-600 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
@@ -50,50 +50,53 @@ export function ImpactSummary() {
     );
   }
 
+  if (!data) return (
+    <section className="bg-blue-600 text-white py-12 text-center px-4">
+      <h2 className="text-3xl font-bold mb-3">Our Impact</h2>
+      <p>Our grant totals are temporarily unavailable. Please check back soon.</p>
+      <Link href="/impact" className="inline-block mt-4 underline">View our impact page →</Link>
+    </section>
+  );
+
   return (
     <section className="bg-blue-600 text-white py-12">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold font-playfair mb-2">Our Impact</h2>
-          <p className="text-lg opacity-90">Real data, real impact, real transparency</p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center text-white">
             <div className="text-4xl md:text-5xl font-bold mb-2">
-              <AnimatedCounter 
+              <AnimatedCounter
                 value={data.totals.dollars}
                 format="currency"
               />
             </div>
-            <div className="text-lg font-semibold">Total Granted</div>
-            <div className="text-sm opacity-75">to date</div>
+            <div className="text-lg font-semibold">Total Awarded</div>
           </div>
-          
+
           <div className="text-center text-white">
             <div className="text-4xl md:text-5xl font-bold mb-2">
-              <AnimatedCounter 
+              <AnimatedCounter
                 value={data.totals.goodDays}
                 format="number"
               />
             </div>
-            <div className="text-lg font-semibold">Good Days Created</div>
-            <div className="text-sm opacity-75">estimated participant-days</div>
+            <div className="text-lg font-semibold">Estimated Good Days</div>
           </div>
-          
+
           <div className="text-center text-white">
             <div className="text-4xl md:text-5xl font-bold mb-2">
-              $<AnimatedCounter 
-                value={data.totals.costPerGD}
-                format="decimal"
-                decimals={1}
+              <AnimatedCounter
+                value={data.totals.awards}
+                format="number"
               />
             </div>
-            <div className="text-lg font-semibold">Cost per Good Day</div>
-            <div className="text-sm opacity-75">average across all grants</div>
+            <div className="text-lg font-semibold">Grants Awarded</div>
           </div>
         </div>
-        
+
         <div className="text-center mt-8">
           <Link
             href="/impact"

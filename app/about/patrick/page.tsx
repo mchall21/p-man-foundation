@@ -1,3 +1,4 @@
+import { RideHistoryFeature } from '@/components/ui/ride-history-feature';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Metadata } from 'next';
@@ -39,7 +40,7 @@ export default function PatrickStoryPage() {
 
         <div className="bg-blue-50 p-8 rounded-lg my-8">
           <blockquote className="text-2xl italic text-center text-gray-800 font-playfair">
-            "One more good day."
+            &ldquo;One more good day.&rdquo;
           </blockquote>
           <p className="text-center text-gray-600 mt-4">
             Patrick described sobriety as stringing together one more good day after another. 
@@ -57,10 +58,10 @@ export default function PatrickStoryPage() {
 
         <h2 className="text-3xl font-bold font-playfair mb-6">Patrick&apos;s Mission</h2>
         <p className="mb-6">
-          In the last years of his life, Patrick committed himself to "choose health" and to help others. To Patrick, 
+          In the last years of his life, Patrick committed himself to &ldquo;choose health&rdquo; and to help others. To Patrick,
           &ldquo;Choose Health&rdquo; meant more than just staying fit. It meant actively making decisions that better yourself, 
           whenever possible, whether they be about the food you eat, the company you keep, or the habits you develop. 
-          This mantra is what led him to cycling in the first place, and it&apos;s what sparked the idea for "Pedal For P-Man."
+          This mantra is what led him to cycling in the first place, and it&apos;s what sparked the idea for &ldquo;Pedal For P-Man.&rdquo;
         </p>
 
         <p className="mb-6">
@@ -84,8 +85,10 @@ export default function PatrickStoryPage() {
         <p className="mb-8">
           The annual Pedal for P-Man ride began as a way to honor Patrick&apos;s memory and continue his mission. 
           What started as a small group of friends cycling through Atlanta has grown into a movement that funds 
-          dozens of grants each year, creating opportunities for people in recovery to have one more good day.
+          grants each year, creating opportunities for people in recovery to have one more good day.
         </p>
+
+        <RideHistoryFeature />
 
         <hr className="my-12 border-gray-300" />
 

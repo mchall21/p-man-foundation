@@ -3,10 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { MetricCounter } from '@/components/ui/animated-counter';
-import { GoodDaysByYearChart, ActivityMixChart, TopProducersChart, CostStats } from '@/components/ui/charts';
+import { AwardsByYearChart, ActivityMixChart, TopProducersChart, CostStats } from '@/components/ui/charts';
 import { GrantStoryGrid, GrantDetailModal } from '@/components/ui/grant-cards';
 import { GrantsTable } from '@/components/ui/grants-table';
-import { EXTERNAL_LINKS } from '@/lib/constants';
 import type { GrantsData } from '@/types';
 
 export default function ImpactPage() {
@@ -24,10 +23,10 @@ export default function ImpactPage() {
         if (process.env.NODE_ENV === 'development') {
           params.set('refresh', '1');
         }
-        
+
         const url = `/api/grants${params.toString() ? '?' + params.toString() : ''}`;
-        const response = await fetch(url);
-        
+        const response = await fetch(url, { signal: AbortSignal.timeout(20000) });
+
         if (!response.ok) {
           throw new Error('Failed to fetch grants data');
         }
@@ -75,12 +74,12 @@ export default function ImpactPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <h1 className="text-4xl md:text-5xl font-bold mb-8">Our Impact</h1>
-      
+
       {/* Intro Block */}
       <div className="prose prose-lg max-w-4xl mb-12">
         <p className="text-xl text-gray-700 leading-relaxed">
-          We fund small, practical grants that create sober social activities. Those days stack up. 
-          With modest dollars and repeatable programs, we turn ordinary meetups — rides, hikes, 
+          We fund small, practical grants that create sober social activities. Those days stack up.
+          With modest dollars and repeatable programs, we turn ordinary meetups — rides, hikes,
           open mics, gym nights — into <strong>one more good day</strong> after another.
         </p>
       </div>
@@ -104,51 +103,31 @@ export default function ImpactPage() {
       {/* At-a-glance Counters */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         <MetricCounter
-          title="Total Granted"
+          title="Total Awarded"
           value={data.totals.dollars}
           format="currency"
-          description="to date"
         />
         <MetricCounter
-          title="Good Days Created"
+          title="Estimated Good Days"
           value={data.totals.goodDays}
           format="number"
-          description="estimated participant-days"
         />
-        <MetricCounter
-          title="Cost per Good Day"
-          value={data.totals.costPerGD}
-          format="decimal"
-          decimals={1}
-          prefix="$"
-          description="average across all grants"
-        />
-      </div>
-
-      {/* Data timestamp */}
-      <div className="text-center text-sm text-gray-500 mb-12">
-        Data last updated: {new Date(data.updatedAt).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        })}
+        <MetricCounter title="Grants Awarded" value={data.totals.awards} format="number" />
       </div>
 
       {/* Visualizations */}
       <div className="space-y-16">
-        
+
         {/* Good Days by Year Chart */}
         <section>
-          <h2 className="text-3xl font-bold mb-4">Good Days by Year</h2>
+          <h2 className="text-3xl font-bold mb-4">Awards by Year</h2>
           <p className="text-gray-600 mb-6">
-            Growth and consistency of outcomes over time.
+            Approved funding by award year, including grants awaiting impact estimates.
           </p>
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <GoodDaysByYearChart data={data.byYear} />
+            <AwardsByYearChart data={data.byYear} />
             <p className="text-sm text-gray-500 mt-4 text-center">
-              Good days are participant-days created by funded activities.
+              Award year reflects the grant cycle. It is separate from application and payment dates.
             </p>
           </div>
         </section>
@@ -157,13 +136,12 @@ export default function ImpactPage() {
         <section>
           <h2 className="text-3xl font-bold mb-4">Cost per Good Day</h2>
           <p className="text-gray-600 mb-6">
-            Transparency on efficiency across different types of programs.
+            Estimated cost uses only awards with recorded impact estimates.
           </p>
           <div className="bg-white rounded-lg shadow-lg p-6">
             <CostStats stats={data.costStats} />
             <p className="text-sm text-gray-600 mt-6 text-center max-w-2xl mx-auto">
-              Most programs deliver low cost per good day; one-off celebrations cost more 
-              but help people reconnect with community.
+              These estimates describe participant-days, not clinical outcomes. Costs are not comparable without considering program context.
             </p>
           </div>
         </section>
@@ -172,7 +150,7 @@ export default function ImpactPage() {
         <section>
           <h2 className="text-3xl font-bold mb-4">Activity Mix</h2>
           <p className="text-gray-600 mb-6">
-            The kinds of sober activities we fund. Activities can overlap.
+            Award dollars by activity. A grant can appear in several categories; these bars must not be added together.
           </p>
           <div className="bg-white rounded-lg shadow-lg p-6">
             <ActivityMixChart data={data.byTag} />
@@ -181,9 +159,9 @@ export default function ImpactPage() {
 
         {/* Top Producers */}
         <section>
-          <h2 className="text-3xl font-bold mb-4">Top "Good Day" Producers</h2>
+          <h2 className="text-3xl font-bold mb-4">Largest Recorded Good-Day Estimates</h2>
           <p className="text-gray-600 mb-6">
-            The most impactful grants by total good days created.
+            Individual awards with the largest recorded estimates; this is not a ranking of recovery outcomes.
           </p>
           <div className="bg-white rounded-lg shadow-lg p-6">
             <TopProducersChart data={data.top} onItemClick={handleGrantClick} />
@@ -192,15 +170,16 @@ export default function ImpactPage() {
 
         {/* Grant Stories */}
         <section>
-          <h2 className="text-3xl font-bold mb-8">Stories from the Field</h2>
-          <GrantStoryGrid stories={data.top.slice(0, 4)} />
+          <h2 className="section-heading mb-6">What a grant makes possible.</h2>
+          <p className="max-w-2xl text-lg text-slate-600 mb-10">A gym, a game, a day on the water. These past awards show the practical ways we support connection and activity in recovery.</p>
+          <GrantStoryGrid grants={data.rows} />
         </section>
 
         {/* All Grants Table */}
-        <section>
+        <section id="grant-database">
           <h2 className="text-3xl font-bold mb-8">Complete Grants Database</h2>
           <p className="text-gray-600 mb-6">
-            Every grant we've made, sortable and searchable. This is our complete transparency in action.
+            Awards recorded in our grant log, sortable and searchable. Awarded amounts do not indicate payment status.
           </p>
           <GrantsTable grants={data.rows} />
         </section>
@@ -210,7 +189,7 @@ export default function ImpactPage() {
           <h3 className="text-2xl font-bold mb-4">How we count &ldquo;good days&rdquo;</h3>
           <div className="prose prose-blue">
             <p>
-              Each grant includes <em>Estimated Days</em> and <em>Participants</em>. 
+              Where available, grants include <em>Estimated Days</em> and <em>Participants</em>.
               We calculate <strong>Good Days = Days × Participants</strong> within a conservative year.
             </p>
             <ul>
@@ -222,14 +201,13 @@ export default function ImpactPage() {
               Numbers come directly from our grant log and can be updated as programs report actuals.
             </p>
           </div>
+          <p className="mt-4 text-sm text-slate-600">Estimates cover {data.coverage.estimatedAwards} of {data.totals.awards} grants. {data.coverage.pendingAwards > 0 && `${data.coverage.pendingAwards} grants have no activity estimate and are included only in funding totals.`} Cost per good day uses the ${data.coverage.estimatedDollars.toLocaleString('en-US')} awarded to programs with estimates.</p>
           <div className="mt-6">
             <a
-              href={EXTERNAL_LINKS.grantsSheet}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#grant-database"
               className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
             >
-              Download current data (CSV) →
+              Explore the grant records →
             </a>
           </div>
         </section>
@@ -238,7 +216,7 @@ export default function ImpactPage() {
         <section className="bg-blue-600 text-white p-8 rounded-lg text-center">
           <h2 className="text-3xl font-bold mb-4">Be Part of the Impact</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Every donation creates more opportunities for people in recovery to find 
+            Every donation creates more opportunities for people in recovery to find
             community and joy in sobriety.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

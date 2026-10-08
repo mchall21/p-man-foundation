@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="7" fill="#193c48"/>
+  <!-- Bicycle mark from Lucide (ISC), matching the site navigation. -->
+  <g transform="translate(2 1) scale(1.1667)" fill="none" stroke="#f8f7f2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="18.5" cy="17.5" r="3.5"/>
+    <circle cx="5.5" cy="17.5" r="3.5"/>
+    <circle cx="15" cy="5" r="1"/>
+    <path d="M12 17.5V14l-3-3 4-3 2 3h2"/>
+  </g>
+</svg>

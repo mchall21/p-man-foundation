@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { animateNumber, formatCurrency, formatNumber } from '@/lib/utils';
+import { formatCurrency } from '@/lib/utils';
 
 interface AnimatedCounterProps {
   value: number;
@@ -13,55 +13,29 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({ 
-  value, 
-  format = 'number',
-  decimals = 0,
-  duration = 2000,
-  prefix = '',
-  suffix = '',
-  className = ''
-}: AnimatedCounterProps) {
-  const [displayValue, setDisplayValue] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const counterRef = useRef<HTMLSpanElement>(null);
-
+export function AnimatedCounter({ value, format = 'number', decimals = 0, duration = 1000, prefix = '', suffix = '', className = '' }: AnimatedCounterProps) {
+  const element = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState(value);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          animateNumber(0, value, duration, setDisplayValue);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (counterRef.current) {
-      observer.observe(counterRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [value, duration, hasAnimated]);
-
-  const formatValue = (val: number): string => {
-    switch (format) {
-      case 'currency':
-        return formatCurrency(val);
-      case 'decimal':
-        return val.toFixed(decimals);
-      case 'number':
-      default:
-        return formatNumber(val);
-    }
-  };
-
-  return (
-    <span ref={counterRef} className={className}>
-      {prefix}{formatValue(displayValue)}{suffix}
-    </span>
-  );
+    setDisplayValue(value);
+    if (!element.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches || duration <= 0) return;
+    let frame = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        setDisplayValue(progress === 1 ? value : value * (1 - Math.pow(1 - progress, 3)));
+        if (progress < 1) frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    });
+    observer.observe(element.current);
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, [value, duration]);
+  const renderNumber = (number: number) => format === 'currency' ? formatCurrency(number) : format === 'decimal' ? number.toFixed(decimals) : Math.round(number).toLocaleString('en-US');
+  return <span ref={element} className={`tabular-nums ${className}`}><span className="sr-only">{prefix}{renderNumber(value)}{suffix}</span><span aria-hidden="true">{prefix}{renderNumber(displayValue)}{suffix}</span></span>;
 }
 
 interface MetricCounterProps {

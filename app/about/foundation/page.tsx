@@ -29,11 +29,11 @@ export default function FoundationPage() {
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2">•</span>
-              <span>Spring disbursement of grants</span>
+              <span>Award decisions and disbursements coordinated with each recipient</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2">•</span>
-              <span>Small grants ($500-$10,000) with clear, practical use</span>
+              <span>Small grants with clear, practical use; see our grant guidelines for details</span>
             </li>
             <li className="flex items-start">
               <span className="text-blue-600 mr-2">•</span>
