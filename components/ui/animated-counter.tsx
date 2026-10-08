@@ -1,6 +1,7 @@
 'use client';
 
-import { formatCurrency, formatNumber } from '@/lib/utils';
+import { useEffect, useRef, useState } from 'react';
+import { formatCurrency } from '@/lib/utils';
 
 interface AnimatedCounterProps {
   value: number;
@@ -12,10 +13,29 @@ interface AnimatedCounterProps {
   className?: string;
 }
 
-export function AnimatedCounter({ value, format = 'number', decimals = 0, prefix = '', suffix = '', className = '' }: AnimatedCounterProps) {
-  // Render the actual figure immediately, including for reduced-motion users.
-  const formatted = format === 'currency' ? formatCurrency(value) : format === 'decimal' ? value.toFixed(decimals) : formatNumber(value);
-  return <span className={className}>{prefix}{formatted}{suffix}</span>;
+export function AnimatedCounter({ value, format = 'number', decimals = 0, duration = 1000, prefix = '', suffix = '', className = '' }: AnimatedCounterProps) {
+  const element = useRef<HTMLSpanElement>(null);
+  const [displayValue, setDisplayValue] = useState(value);
+  useEffect(() => {
+    setDisplayValue(value);
+    if (!element.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches || duration <= 0) return;
+    let frame = 0;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      const start = performance.now();
+      const tick = (now: number) => {
+        const progress = Math.min((now - start) / duration, 1);
+        setDisplayValue(progress === 1 ? value : value * (1 - Math.pow(1 - progress, 3)));
+        if (progress < 1) frame = requestAnimationFrame(tick);
+      };
+      frame = requestAnimationFrame(tick);
+    });
+    observer.observe(element.current);
+    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
+  }, [value, duration]);
+  const renderNumber = (number: number) => format === 'currency' ? formatCurrency(number) : format === 'decimal' ? number.toFixed(decimals) : Math.round(number).toLocaleString('en-US');
+  return <span ref={element} className={`tabular-nums ${className}`}><span className="sr-only">{prefix}{renderNumber(value)}{suffix}</span><span aria-hidden="true">{prefix}{renderNumber(displayValue)}{suffix}</span></span>;
 }
 
 interface MetricCounterProps {

@@ -63,7 +63,6 @@ export function ImpactSummary() {
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold font-playfair mb-2">Our Impact</h2>
-          <p className="text-lg opacity-90">Small grants. More opportunities to connect.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -75,7 +74,6 @@ export function ImpactSummary() {
               />
             </div>
             <div className="text-lg font-semibold">Total Awarded</div>
-            <div className="text-sm opacity-75">to date</div>
           </div>
 
           <div className="text-center text-white">
@@ -86,7 +84,6 @@ export function ImpactSummary() {
               />
             </div>
             <div className="text-lg font-semibold">Estimated Good Days</div>
-            <div className="text-sm opacity-75">estimated participant-days</div>
           </div>
 
           <div className="text-center text-white">
@@ -97,11 +94,9 @@ export function ImpactSummary() {
               />
             </div>
             <div className="text-lg font-semibold">Grants Awarded</div>
-            <div className="text-sm opacity-75">across recorded grant cycles</div>
           </div>
         </div>
 
-        <p className="text-center text-sm opacity-90 mt-8">Impact estimates cover {data.coverage.estimatedAwards} of {data.totals.awards} awards. {data.coverage.pendingAwards} await estimates.</p>
         <div className="text-center mt-8">
           <Link
             href="/impact"

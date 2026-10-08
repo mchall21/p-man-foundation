@@ -106,30 +106,13 @@ export default function ImpactPage() {
           title="Total Awarded"
           value={data.totals.dollars}
           format="currency"
-          description="to date"
         />
         <MetricCounter
           title="Estimated Good Days"
           value={data.totals.goodDays}
           format="number"
-          description="estimated participant-days"
         />
-        <MetricCounter title="Grants Awarded" value={data.totals.awards} format="number" description="across recorded grant cycles" />
-      </div>
-
-      <div className="bg-blue-50 rounded-lg p-6 mb-8 text-gray-700">
-        <p>Impact estimates cover <strong>{data.coverage.estimatedAwards} of {data.totals.awards} awards</strong>. {data.coverage.pendingAwards} awards await estimates and remain included in funding totals.</p>
-        <p className="mt-2">The weighted cost per estimated good day is {data.totals.costPerGD === null ? 'not yet available' : `$${data.totals.costPerGD.toFixed(2)}`}, using only the ${data.coverage.estimatedDollars.toLocaleString('en-US')} awarded to programs with estimates.</p>
-      </div>
-      {/* Data timestamp */}
-      <div className="text-center text-sm text-gray-500 mb-12">
-        Grant log fetched: {new Date(data.updatedAt).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        })}. This is the source retrieval time, not its last edit date.
+        <MetricCounter title="Grants Awarded" value={data.totals.awards} format="number" />
       </div>
 
       {/* Visualizations */}
@@ -187,7 +170,6 @@ export default function ImpactPage() {
 
         {/* Grant Stories */}
         <section>
-          <p className="eyebrow mb-4">Grants in action</p>
           <h2 className="section-heading mb-6">What a grant makes possible.</h2>
           <p className="max-w-2xl text-lg text-slate-600 mb-10">A gym, a game, a day on the water. These past awards show the practical ways we support connection and activity in recovery.</p>
           <GrantStoryGrid grants={data.rows} />
@@ -219,6 +201,7 @@ export default function ImpactPage() {
               Numbers come directly from our grant log and can be updated as programs report actuals.
             </p>
           </div>
+          <p className="mt-4 text-sm text-slate-600">Estimates cover {data.coverage.estimatedAwards} of {data.totals.awards} grants. {data.coverage.pendingAwards > 0 && `${data.coverage.pendingAwards} grants have no activity estimate and are included only in funding totals.`} Cost per good day uses the ${data.coverage.estimatedDollars.toLocaleString('en-US')} awarded to programs with estimates.</p>
           <div className="mt-6">
             <a
               href="#grant-database"

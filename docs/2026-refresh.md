@@ -85,3 +85,7 @@ Matthew authorized best-effort estimation on October 7. Prepared 1,097 additiona
 Per-award calculations and assumptions are in `2026-good-day-estimates.json`; the import payload now includes native formulas and cell notes. Application-based subtotal is 354; the remaining 743 uses explicit assumptions about partial funding, attendance, or duration. Do not describe the aggregate as unique people or exclusively attributable outcomes.
 
 Retried the canonical sheet update after inspecting the blank target rows. Google again returned PERMISSION_DENIED. Neither canonical data nor website totals changed. Editor access for the connected account is still required; re-read target rows before applying the payload to avoid overwriting later changes.
+
+## Counter and copy cleanup
+
+Removed redundant metric subtitles and the homepage estimate-coverage sentence. Kept the clear Estimated Good Days label and consolidated coverage/cost methodology on the impact page. Removed the public fetch timestamp and repetitive section eyebrows across the home, ride, and support pages. Restored an exact, comma-formatted count-up ticker with reduced-motion support and a stable accessible value; no K/M abbreviation. Source figures remain unchanged pending grant-sheet access. Scoped lint, TypeScript, desktop/mobile layout, and final counter-value checks passed.
