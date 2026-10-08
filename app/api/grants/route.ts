@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { unstable_cache } from 'next/cache';
 import { analyzeGrants, parseCSV, processGrant } from '@/lib/grants';
+import { includeApproved2026 } from '@/lib/grant-supplement';
 import type { ProcessedGrant } from '@/types';
 
 function getCSVUrl(): string {
@@ -13,13 +14,15 @@ function getCSVUrl(): string {
 async function fetchGrants(csvUrl: string) {
   const response = await fetch(csvUrl, { cache: 'no-store', signal: AbortSignal.timeout(15000) });
   if (!response.ok) throw new Error('Grant source unavailable');
-  const grants = parseCSV(await response.text()).map(processGrant).filter((grant): grant is ProcessedGrant => grant !== null);
+  const sourceRows = parseCSV(await response.text());
+  if (!sourceRows.some(row => processGrant(row) !== null)) throw new Error('Grant source has no valid awards');
+  const grants = includeApproved2026(sourceRows).map(processGrant).filter((grant): grant is ProcessedGrant => grant !== null);
   if (!grants.length) throw new Error('Grant source has no valid awards');
   return analyzeGrants(grants);
 }
 
 const configuredTTL = Number(process.env.GRANTS_CACHE_TTL || 600);
-const getCachedGrants = unstable_cache(fetchGrants, ['grants-data-v2'], {
+const getCachedGrants = unstable_cache(fetchGrants, ['grants-data-v3-approved-2026'], {
   revalidate: Number.isFinite(configuredTTL) && configuredTTL > 0 ? configuredTTL : 600,
   tags: ['grants'],
 });
