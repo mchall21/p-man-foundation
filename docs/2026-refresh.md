@@ -28,7 +28,7 @@ Historical estimated good days remain 6,921. After import, coverage should be 63
 - 12 optimized 2025 photos (about 3 MB total), with links to originals and full album.
 - 2025 recap film loads on request; Google Drive retains the source video.
 - 2025 gallery/history entry, November 14, 2026 event date retained from production.
-- Removed the old 10th-ride ticket link from the ride page pending a confirmed 2026 URL.
+- Replaced the old 10th-ride ticket link with Matthew’s confirmed 2026 Eventbrite URL.
 - Removed unavailable pledge promises and unsupported donation-to-outcome examples.
 - Grant parsing handles quoted multiline fields and formatted numbers. Award Year works separately from Date. Unknown impact does not remove funded awards. No fabricated fallback totals.
 - Impact page explains coverage, funding vs payment, overlapping categories, and estimated participant-days.
@@ -37,7 +37,7 @@ Historical estimated good days remain 6,921. After import, coverage should be 63
 ## Review items before production
 
 - Editor access and verified 2026 import.
-- Confirm current 2026 registration URL, if registration is open.
+- 2026 registration URL confirmed and linked from the homepage and ride page.
 - Video playback verified in the embedded Drive player. Its closed-caption control is disabled; a caption track is still needed.
 - Preview review. Vercel build passed for the preview. The connected Vercel account lacks access to this project/team, so remote browser verification remains blocked by SSO; local desktop/mobile checks passed. Do not merge to production until requested.
 
@@ -65,3 +65,9 @@ Rebuilt the history page as a chronological, shirt-led archive. All nine 2016–
 ## Shirt design context
 
 Matthew supplied and confirmed the design references: 2017 Outkast, 2018 Atlanta skyline, 2019 Mike Ditka/Chicago Bears, 2020 COVID, 2021 Chicago flag, 2022 Irish roots, 2023 Troy’s Decide brand, 2024 Peachtree Road Race, and 2025 One More Good Day/tenth anniversary. Added Audrey’s credit (Patrick’s sister-in-law), with the 2023 heart design exception. Intro now explains that most years capture something important to Patrick.
+
+## Event registration and favicon
+
+Added the approved Eventbrite copy, 9:30 AM arrival, 10 AM speakers/grantee panel, 10:30 AM kids’ ride, 11 AM adult ride, and noon lunch/socializing. Added Grant Park pavilion and parking details, ticket links on the ride page and homepage, and replaced the old Eventbrite constant. All new event copy avoids em dashes.
+
+Added a navy/cream bicycle favicon matching the Lucide header mark, with SVG, multi-size ICO, and Apple touch icon. Verified rendered icon metadata, local icon delivery, ticket destinations, all schedule times, and desktop/390px layouts. Scoped ESLint and TypeScript passed. Eventbrite blocked the automated page read; the ticket URL and copy were supplied and confirmed by Matthew.

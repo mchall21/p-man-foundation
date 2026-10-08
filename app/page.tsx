@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { EXTERNAL_LINKS } from '@/lib/constants';
 import { ImpactSummary } from '@/components/ui/impact-summary';
 import { RideRecap } from '@/components/ui/ride-recap';
 import { pedal2025Hero, pedal2025Group } from '@/lib/media-2025';
@@ -28,10 +29,10 @@ export default function Home() {
         </figure>
       </section>
       <div className="bg-[#e9e5da]">
-        <Link href="/pedal" className="page-shell flex flex-wrap items-center justify-between gap-4 py-6">
-          <span className="text-lg"><span className="font-semibold">Let’s ride again.</span> November 14, 2026 · Grant Park, Atlanta</span>
-          <span className="inline-flex items-center gap-3 font-semibold">The 11th annual ride <ArrowRight size={19} /></span>
-        </Link>
+        <div className="page-shell flex flex-wrap items-center justify-between gap-4 py-6">
+          <span className="text-lg"><span className="font-semibold">Let’s ride again.</span> November 14, 2026 · 9:30 AM · Grant Park, Atlanta</span>
+          <div className="flex flex-wrap items-center gap-5"><Link href="/pedal" className="font-semibold underline underline-offset-4">Ride details</Link><a href={EXTERNAL_LINKS.eventbrite} className="button-primary">Get tickets <ArrowRight size={19} /></a></div>
+        </div>
       </div>
       <ImpactSummary />
       <section className="page-shell grid gap-10 py-20 md:grid-cols-2 md:items-center lg:gap-24">
