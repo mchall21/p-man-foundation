@@ -1,0 +1,124 @@
+{
+  "status": "BEST_EFFORT_READY_TO_APPLY",
+  "award_cycle": 2026,
+  "source": "https://docs.google.com/spreadsheets/d/1esaDQaoVY8vTd0gd5LxA4KCWk0oMXVEPCY-pQ3aS-Xg/edit",
+  "definition": "One participant taking part in one sober social activity day. Multiple activities on the same day are counted once per participant where identifiable. Not unique people, measured sobriety, or clinical outcomes.",
+  "method_limit": "Mixes funded participation, partial-funding proxies, and supported event reach. Not a causal or exclusively attributable impact measure. Modeled values need review before becoming website totals. Activity dates may precede the 2026 award cycle.",
+  "rows": [
+    {
+      "recipient": "Adventures in Recovery",
+      "source_row": 2,
+      "estimated_good_days": 72,
+      "basis": "6 participants × 4 trips × 3 days; exclude 2 guides per trip.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "The Pebble Men’s Retreat",
+      "source_row": 6,
+      "estimated_good_days": 36,
+      "basis": "12 applicants × 3 retreat days. Do not increase to 20 scholarship places merely because approval exceeds the request.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "No Longer Bound",
+      "source_row": 7,
+      "estimated_good_days": 68,
+      "basis": "239 proposed outing attendances × $4,000/$14,000, rounded down. Proportional reduction assumes costs and participation scale together.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "Fresh Wind Recovery Ministry",
+      "source_row": 8,
+      "estimated_good_days": 208,
+      "basis": "Assume 40 of 80 clients attend each of 26 weekly classes; scale by $1,000/$5,000. Attendance and linear funding allocation are unconfirmed. Full 80-client attendance would produce 416 instead.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "Navigate Recovery",
+      "source_row": 9,
+      "estimated_good_days": 40,
+      "basis": "40 funded 5K registrations × 1 day.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "StandUp4Recovery",
+      "source_row": 10,
+      "estimated_good_days": 120,
+      "basis": "4 shows × low-end 60 attendees × $2,000/$4,000. Excludes improv workshop without a count. Proportional model; the award could instead pay performer fees for all 4 shows.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "Individual grant recipient",
+      "source_row": 14,
+      "estimated_good_days": null,
+      "basis": "Recovery housing/support is outside the sober-social participant-day metric. Retain award dollars; do not translate housing weeks into social activity days.",
+      "status": "outside-metric"
+    },
+    {
+      "recipient": "The Connection Forsyth",
+      "source_row": 16,
+      "estimated_good_days": 50,
+      "basis": "5 day trips × 10 participants. Exclude 2 staff per trip. Approval covers full proposed budget; verify delivery given separate payment note.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "DIVAS who win Freedom Center",
+      "source_row": 18,
+      "estimated_good_days": 65,
+      "basis": "328 projected event attendees × $1,000/$5,000, rounded down. Funding-share proxy uses requested budget because full event cost is unknown; volunteer inclusion in 328 is also unclear.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "New Roots Glynn",
+      "source_row": 21,
+      "estimated_good_days": 20,
+      "basis": "Low-end 150 event guests × $2,000/$14,400 total event budget, rounded down. Use full budget, not $7,500 requested. No downstream fundraising multiplier.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "Self-Discovery 24",
+      "source_row": 23,
+      "estimated_good_days": 100,
+      "basis": "100 funded tubing/kayaking registrations × 1 day. Exclude additional 50 general attendees from registration count.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "BRIDGE Recovery",
+      "source_row": 24,
+      "estimated_good_days": 36,
+      "basis": "3 horseback trips × 12 participants; lunch is the same day and is not counted again.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "Veteran Supports Service",
+      "source_row": 25,
+      "estimated_good_days": 210,
+      "basis": "50 annual-event attendees + 20 monthly meal attendances × assumed 8 funded months. Eight months borrowed from the cornhole budget, not explicitly stated for meals. Cornhole excluded pending attendance figures. Ensure meals/event do not duplicate same-person same-day participation.",
+      "status": "modeled"
+    },
+    {
+      "recipient": "Athens Recovery Warriors",
+      "source_row": 26,
+      "estimated_good_days": 20,
+      "basis": "20 Tough Mudder participants × 1 event day. No additional training days without session/attendance counts.",
+      "status": "application-based"
+    },
+    {
+      "recipient": "Halloween costume party",
+      "source_row": 27,
+      "estimated_good_days": 52,
+      "basis": "Use reported prior attendance of up to 52 as the working forecast for one party. Grant supports prizes, not the full event. This is supported event reach, not exclusive funding attribution. Seven winners are not the entire audience.",
+      "status": "modeled"
+    }
+  ],
+  "proposed_new_good_days": 1097,
+  "application_based_subtotal": 354,
+  "historical_estimate_snapshot": 6921,
+  "illustrative_combined_total": 8018,
+  "publication_checks": [
+    "Reconcile 2026 import against canonical awards; source grant log still lacks these rows.",
+    "Review partial-funding assumptions, Fresh Wind attendance and Veterans meal duration.",
+    "Check shared events/participants for same-day duplicates across grants.",
+    "Keep individual recovery-support award outside activity-day count."
+  ]
+}

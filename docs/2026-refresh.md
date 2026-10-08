@@ -77,3 +77,11 @@ Added a navy/cream bicycle favicon matching the Lucide header mark, with SVG, mu
 Compared the refresh against origin/main after Matthew flagged lost content. Restored a prominent Patrick photo/story feature, the full explanation of ticket-funded event costs and 100% of donations going to grants, and all three older community photographs on the homepage. Restored desktop mission navigation and a ride-page mission link; fixed the footer’s pre-existing /about link to the actual Patrick page. The refreshed inline shirt/photo archive and approved design captions remain.
 
 Patrick’s full story and the foundation’s mission, values, and background were retained. Grant application FAQs remain, with updated award/timing details. Kept corrections removing unsupported donation-to-outcome price examples, mock grant totals, and promises of an unavailable per-mile pledge product. The former rotating community hero is now a visible photo collection, preserving the images alongside the new 2025 hero. Verified 1024px desktop and 390px mobile layouts and restored content visibility; scoped lint passed.
+
+## Best-effort 2026 good-day estimates
+
+Matthew authorized best-effort estimation on October 7. Prepared 1,097 additional participant-days across 14 of the 15 approved awards; the individual recovery-support grant remains outside the sober-social metric. Added to the existing 6,921 snapshot, the combined estimate is 8,018. These are forecasts, not attendance actuals.
+
+Per-award calculations and assumptions are in `2026-good-day-estimates.json`; the import payload now includes native formulas and cell notes. Application-based subtotal is 354; the remaining 743 uses explicit assumptions about partial funding, attendance, or duration. Do not describe the aggregate as unique people or exclusively attributable outcomes.
+
+Retried the canonical sheet update after inspecting the blank target rows. Google again returned PERMISSION_DENIED. Neither canonical data nor website totals changed. Editor access for the connected account is still required; re-read target rows before applying the payload to avoid overwriting later changes.

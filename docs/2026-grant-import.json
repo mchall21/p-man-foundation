@@ -112,8 +112,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K65=\"\",L65=\"\"),\"\",K65*L65)"
-                }
+                  "formulaValue": "=6*4*3"
+                },
+                "note": "Best-effort estimate, not actual attendance. 6 participants × 4 trips × 3 days; exclude 2 guides per trip."
               },
               {
                 "userEnteredValue": {
@@ -132,7 +133,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 6 participants × 4 trips × 3 days; exclude 2 guides per trip."
                 }
               }
             ]
@@ -182,8 +183,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K66=\"\",L66=\"\"),\"\",K66*L66)"
-                }
+                  "formulaValue": "=12*3"
+                },
+                "note": "Best-effort estimate, not actual attendance. 12 applicants × 3 retreat days. Do not increase to 20 scholarship places merely because approval exceeds the request."
               },
               {
                 "userEnteredValue": {
@@ -202,7 +204,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 12 applicants × 3 retreat days. Do not increase to 20 scholarship places merely because approval exceeds the request."
                 }
               }
             ]
@@ -256,8 +258,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K67=\"\",L67=\"\"),\"\",K67*L67)"
-                }
+                  "formulaValue": "=ROUNDDOWN((3*53+2*40)*4000/14000,0)"
+                },
+                "note": "Best-effort estimate, not actual attendance. 239 proposed outing attendances × $4,000/$14,000, rounded down. Proportional reduction assumes costs and participation scale together."
               },
               {
                 "userEnteredValue": {
@@ -276,7 +279,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 239 proposed outing attendances × $4,000/$14,000, rounded down. Proportional reduction assumes costs and participation scale together."
                 }
               }
             ]
@@ -326,8 +329,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K68=\"\",L68=\"\"),\"\",K68*L68)"
-                }
+                  "formulaValue": "=40*26*1000/5000"
+                },
+                "note": "Best-effort estimate, not actual attendance. Assume 40 of 80 clients attend each of 26 weekly classes; scale by $1,000/$5,000. Attendance and linear funding allocation are unconfirmed. Full 80-client attendance would produce 416 instead."
               },
               {
                 "userEnteredValue": {
@@ -346,7 +350,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: Assume 40 of 80 clients attend each of 26 weekly classes; scale by $1,000/$5,000. Attendance and linear funding allocation are unconfirmed. Full 80-client attendance would produce 416 instead."
                 }
               }
             ]
@@ -396,8 +400,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K69=\"\",L69=\"\"),\"\",K69*L69)"
-                }
+                  "formulaValue": "=40*1"
+                },
+                "note": "Best-effort estimate, not actual attendance. 40 funded 5K registrations × 1 day."
               },
               {
                 "userEnteredValue": {
@@ -416,7 +421,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 40 funded 5K registrations × 1 day."
                 }
               }
             ]
@@ -466,8 +471,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K70=\"\",L70=\"\"),\"\",K70*L70)"
-                }
+                  "formulaValue": "=4*60*2000/4000"
+                },
+                "note": "Best-effort estimate, not actual attendance. 4 shows × low-end 60 attendees × $2,000/$4,000. Excludes improv workshop without a count. Proportional model; the award could instead pay performer fees for all 4 shows."
               },
               {
                 "userEnteredValue": {
@@ -486,7 +492,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 4 shows × low-end 60 attendees × $2,000/$4,000. Excludes improv workshop without a count. Proportional model; the award could instead pay performer fees for all 4 shows."
                 }
               }
             ]
@@ -535,9 +541,7 @@
               {},
               {},
               {
-                "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K71=\"\",L71=\"\"),\"\",K71*L71)"
-                }
+                "note": "Recovery housing/support is outside the sober-social participant-day metric. Retain award dollars; do not translate housing weeks into social activity days."
               },
               {
                 "userEnteredValue": {
@@ -556,7 +560,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "Recipient name and personal application narrative withheld from public grant data. Source row 14. Exact award date and impact estimate not verified."
+                  "stringValue": "Recipient name and personal application narrative withheld from public grant data. Source row 14. Exact award date and impact estimate not verified. Good-day basis: Recovery housing/support is outside the sober-social participant-day metric. Retain award dollars; do not translate housing weeks into social activity days."
                 }
               }
             ]
@@ -606,8 +610,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K72=\"\",L72=\"\"),\"\",K72*L72)"
-                }
+                  "formulaValue": "=5*10"
+                },
+                "note": "Best-effort estimate, not actual attendance. 5 day trips × 10 participants. Exclude 2 staff per trip. Approval covers full proposed budget; verify delivery given separate payment note."
               },
               {
                 "userEnteredValue": {
@@ -626,7 +631,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "Approved $4,460; source payment note says $4,000. Preserve approved amount; $460 difference requires reconciliation. Exact award date and impact estimate not verified."
+                  "stringValue": "Approved $4,460; source payment note says $4,000. Preserve approved amount; $460 difference requires reconciliation. Exact award date and impact estimate not verified. Good-day basis: 5 day trips × 10 participants. Exclude 2 staff per trip. Approval covers full proposed budget; verify delivery given separate payment note."
                 }
               }
             ]
@@ -676,8 +681,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K73=\"\",L73=\"\"),\"\",K73*L73)"
-                }
+                  "formulaValue": "=ROUNDDOWN(328*1000/5000,0)"
+                },
+                "note": "Best-effort estimate, not actual attendance. 328 projected event attendees × $1,000/$5,000, rounded down. Funding-share proxy uses requested budget because full event cost is unknown; volunteer inclusion in 328 is also unclear."
               },
               {
                 "userEnteredValue": {
@@ -696,7 +702,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 328 projected event attendees × $1,000/$5,000, rounded down. Funding-share proxy uses requested budget because full event cost is unknown; volunteer inclusion in 328 is also unclear."
                 }
               }
             ]
@@ -746,8 +752,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K74=\"\",L74=\"\"),\"\",K74*L74)"
-                }
+                  "formulaValue": "=ROUNDDOWN(150*2000/14400,0)"
+                },
+                "note": "Best-effort estimate, not actual attendance. Low-end 150 event guests × $2,000/$14,400 total event budget, rounded down. Use full budget, not $7,500 requested. No downstream fundraising multiplier."
               },
               {
                 "userEnteredValue": {
@@ -766,7 +773,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: Low-end 150 event guests × $2,000/$14,400 total event budget, rounded down. Use full budget, not $7,500 requested. No downstream fundraising multiplier."
                 }
               }
             ]
@@ -816,8 +823,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K75=\"\",L75=\"\"),\"\",K75*L75)"
-                }
+                  "formulaValue": "=100*1"
+                },
+                "note": "Best-effort estimate, not actual attendance. 100 funded tubing/kayaking registrations × 1 day. Exclude additional 50 general attendees from registration count."
               },
               {
                 "userEnteredValue": {
@@ -836,7 +844,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 100 funded tubing/kayaking registrations × 1 day. Exclude additional 50 general attendees from registration count."
                 }
               }
             ]
@@ -886,8 +894,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K76=\"\",L76=\"\"),\"\",K76*L76)"
-                }
+                  "formulaValue": "=3*12"
+                },
+                "note": "Best-effort estimate, not actual attendance. 3 horseback trips × 12 participants; lunch is the same day and is not counted again."
               },
               {
                 "userEnteredValue": {
@@ -906,7 +915,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 3 horseback trips × 12 participants; lunch is the same day and is not counted again."
                 }
               }
             ]
@@ -956,8 +965,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K77=\"\",L77=\"\"),\"\",K77*L77)"
-                }
+                  "formulaValue": "=50+20*8"
+                },
+                "note": "Best-effort estimate, not actual attendance. 50 annual-event attendees + 20 monthly meal attendances × assumed 8 funded months. Eight months borrowed from the cornhole budget, not explicitly stated for meals. Cornhole excluded pending attendance figures. Ensure meals/event do not duplicate same-person same-day participation."
               },
               {
                 "userEnteredValue": {
@@ -976,7 +986,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 50 annual-event attendees + 20 monthly meal attendances × assumed 8 funded months. Eight months borrowed from the cornhole budget, not explicitly stated for meals. Cornhole excluded pending attendance figures. Ensure meals/event do not duplicate same-person same-day participation."
                 }
               }
             ]
@@ -1026,8 +1036,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K78=\"\",L78=\"\"),\"\",K78*L78)"
-                }
+                  "formulaValue": "=20*1"
+                },
+                "note": "Best-effort estimate, not actual attendance. 20 Tough Mudder participants × 1 event day. No additional training days without session/attendance counts."
               },
               {
                 "userEnteredValue": {
@@ -1046,7 +1057,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: 20 Tough Mudder participants × 1 event day. No additional training days without session/attendance counts."
                 }
               }
             ]
@@ -1096,8 +1107,9 @@
               {},
               {
                 "userEnteredValue": {
-                  "formulaValue": "=IF(OR(K79=\"\",L79=\"\"),\"\",K79*L79)"
-                }
+                  "formulaValue": "=52*1"
+                },
+                "note": "Best-effort estimate, not actual attendance. Use reported prior attendance of up to 52 as the working forecast for one party. Grant supports prizes, not the full event. This is supported event reach, not exclusive funding attribution. Seven winners are not the entire audience."
               },
               {
                 "userEnteredValue": {
@@ -1116,7 +1128,7 @@
               },
               {
                 "userEnteredValue": {
-                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified."
+                  "stringValue": "2026 award cycle confirmed by Matthew Hall on 2026-10-07. Exact award date and impact estimate not verified. Good-day basis: Use reported prior attendance of up to 52 as the working forecast for one party. Grant supports prizes, not the full event. This is supported event reach, not exclusive funding attribution. Seven winners are not the entire audience."
                 }
               }
             ]
