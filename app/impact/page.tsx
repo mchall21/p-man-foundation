@@ -198,7 +198,7 @@ export default function ImpactPage() {
               <li>Equipment/paths = small daily users × many days.</li>
             </ul>
             <p>
-              Numbers come directly from our grant log and can be updated as programs report actuals.
+              Figures combine our grant log with approved 2026 awards. Good days are estimates of participation, including best-effort assumptions for partially funded programs, and can be updated as programs report actuals.
             </p>
           </div>
           <p className="mt-4 text-sm text-slate-600">Estimates cover {data.coverage.estimatedAwards} of {data.totals.awards} grants. {data.coverage.pendingAwards > 0 && `${data.coverage.pendingAwards} grants have no activity estimate and are included only in funding totals.`} Cost per good day uses the ${data.coverage.estimatedDollars.toLocaleString('en-US')} awarded to programs with estimates.</p>

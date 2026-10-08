@@ -89,3 +89,7 @@ Retried the canonical sheet update after inspecting the blank target rows. Googl
 ## Counter and copy cleanup
 
 Removed redundant metric subtitles and the homepage estimate-coverage sentence. Kept the clear Estimated Good Days label and consolidated coverage/cost methodology on the impact page. Removed the public fetch timestamp and repetitive section eyebrows across the home, ride, and support pages. Restored an exact, comma-formatted count-up ticker with reduced-motion support and a stable accessible value; no K/M abbreviation. Source figures remain unchanged pending grant-sheet access. Scoped lint, TypeScript, desktop/mobile layout, and final counter-value checks passed.
+
+## Live totals without grant-log write access
+
+The website now supplements the readable grant log with the 15 approved 2026 awards and reviewed best-effort estimates in lib/grants-2026.json. This is a published data supplement, not a changed Google Sheet. Combined totals verified against the live CSV: $161,751, 78 awards, and 8,018 estimated good days. Match imported rows by decision-source reference, with award-year/name/amount fallback, so later imports do not duplicate awards. Existing sheet corrections take precedence; only missing estimates are supplemented. Six focused tests cover totals, full/partial imports, missing estimates, historical separation, and source corrections.
