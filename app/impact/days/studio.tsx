@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { artworkSVG, buildDayArtwork, formatDays } from '@/lib/good-day-art';
+import { artworkSVG, buildDayArtwork, formatDays, nearestDayDot } from '@/lib/good-day-art';
 import type { DayArtwork } from '@/lib/good-day-art';
 import styles from './studio.module.css';
 
@@ -22,6 +22,7 @@ export default function DayStudio() {
   const [zoom, setZoom] = useState(1);
   const [dotInput, setDotInput] = useState('');
   const [lookupError, setLookupError] = useState('');
+  const [showMobileGrant, setShowMobileGrant] = useState(false);
   const controller = useRef<AbortController | null>(null);
 
   const load = useCallback(async (refresh = false) => {
@@ -35,7 +36,7 @@ export default function DayStudio() {
       if (!response.ok) throw new Error('The grant data is unavailable. Please try again.');
       const next = buildDayArtwork(await response.json());
       if (controller.current !== request) return;
-      setArt(next); setSelected(null); setDotInput(''); setLookupError('');
+      setArt(next); setSelected(null); setDotInput(''); setLookupError(''); setShowMobileGrant(false);
     } catch (cause) {
       if (controller.current !== request) return;
       setError(cause instanceof Error ? cause.message : 'Could not load the grant data.');
@@ -58,7 +59,7 @@ export default function DayStudio() {
 
   function selectDot(index: number) {
     if (!art || !Number.isInteger(index) || index < 0 || index >= art.total) return;
-    setSelected(index); setDotInput(String(index + 1)); setLookupError('');
+    setSelected(index); setDotInput(String(index + 1)); setLookupError(''); setShowMobileGrant(true);
   }
 
   return <div className={styles.studio}>
@@ -83,15 +84,30 @@ export default function DayStudio() {
             <option value={1}>Fit</option><option value={2}>2×</option><option value={4}>4×</option>
           </select></div>
         </div>
+        <p id="tap-instructions" className={styles.tapPrompt}><strong>Tap the sunrise to discover a grant.</strong> You can tap between dots, too.</p>
         <div className={styles.viewport}>
           {art.total ? <div className={styles.art} style={{ width: `${zoom * 100}%` }}
+            role="group" tabIndex={0} aria-label="Explore good days" aria-describedby="tap-instructions"
+            onKeyDown={event => {
+              if (event.key === 'Escape') { setShowMobileGrant(false); return; }
+              if (!['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter', ' '].includes(event.key)) return;
+              event.preventDefault();
+              const direction = event.key === 'ArrowLeft' || event.key === 'ArrowUp' ? -1 : 1;
+              selectDot(selected === null ? 0 : Math.max(0, Math.min(art.total - 1, selected + direction)));
+            }}
             onClick={event => {
-              const target = (event.target as Element).closest('[data-dot-index]');
-              if (target) selectDot(Number(target.getAttribute('data-dot-index')));
+              const svgNode = event.currentTarget.querySelector('svg');
+              const matrix = svgNode?.getScreenCTM();
+              if (!svgNode || !matrix) return;
+              const point = svgNode.createSVGPoint();
+              point.x = event.clientX; point.y = event.clientY;
+              const position = point.matrixTransform(matrix.inverse());
+              const index = nearestDayDot(art.dots, position.x, position.y);
+              if (index !== null) selectDot(index);
             }} dangerouslySetInnerHTML={svgContent} /> : <p className={styles.loading}>No good days are recorded yet. Grants without estimates are not drawn as dots.</p>}
         </div>
-        {dot && <style>{`#good-day-dots [data-dot-index="${dot.index}"] { fill: #c45825; stroke: #c45825; stroke-width: 2; }`}</style>}
-        <p className={styles.hint}>Every dot has a grant behind it. Tap one, or choose a day number.</p>
+        {dot && <style>{`#good-day-dots [data-dot-index="${dot.index}"] { fill: #c45825; stroke: #c45825; stroke-width: 3; }`}</style>}
+        <p className={styles.hint}>Tap anywhere in the pattern, or use the arrow keys to explore one day at a time.</p>
       </section>
 
       <aside className={styles.inspector} aria-label="Explore the dots">
@@ -102,7 +118,7 @@ export default function DayStudio() {
           <label className={styles.label} htmlFor="grant-picker">Explore a grant</label>
           <select id="grant-picker" className={styles.select} value={grant?.id ?? ''} onChange={event => {
             const next = art.grants.find(item => item.id === event.target.value);
-            if (next) selectDot(next.firstDot); else { setSelected(null); setDotInput(''); }
+            if (next) selectDot(next.firstDot); else { setSelected(null); setDotInput(''); setShowMobileGrant(false); }
           }}><option value="">Choose a grant</option>{art.grants.map(item => <option key={item.id} value={item.id}>{item.source.year ?? 'Undated'} · {item.source.grantee} · {formatDays(item.count)} days</option>)}</select>
           <form onSubmit={event => {
             event.preventDefault();
@@ -138,5 +154,13 @@ export default function DayStudio() {
         <button className={styles.textButton} disabled={loading || !!error || art.total === 0} onClick={() => download(`pman-${art.total}-dot-index.json`, JSON.stringify(art, null, 2), 'application/json')}>Download dot labels</button>
       </aside>
     </div>}
+    {dot && grant && showMobileGrant && <section className={styles.mobileGrant} aria-label="Selected grant" aria-live="polite" aria-atomic="true">
+      <button className={styles.dismiss} aria-label="Dismiss grant details" onClick={() => setShowMobileGrant(false)}>×</button>
+      <p className="eyebrow">The grant behind day {formatDays(dot.index + 1)}</p>
+      <h2>{grant.source.grantee}</h2>
+      <p className={styles.mobileDescription}>{grant.source.description || 'A grant supporting community and connection.'}</p>
+      <p className={styles.mobileMeta}>{grant.source.year ?? 'Year unrecorded'} · {formatDays(grant.count)} good days supported</p>
+      <div className={styles.mobileActions}><button onClick={() => selectDot((dot.index + 1) % art!.total)}>Explore another day →</button><button onClick={() => setShowMobileGrant(false)}>Back to the dots</button></div>
+    </section>}
   </div>;
 }

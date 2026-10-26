@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { analyzeGrants, processGrant } from './grants';
-import { artworkSVG, buildDayArtwork, sunrisePositions } from './good-day-art';
+import { artworkSVG, buildDayArtwork, sunrisePositions, nearestDayDot } from './good-day-art';
 
 const grant = (name: string, days: number | null) => processGrant({ Grantee: name, Amount: '1000', 'Award Year': '2026', 'Good Days': days === null ? '' : String(days), Description: 'A community activity' })!;
 
@@ -69,4 +69,20 @@ test('untrusted grant text cannot escape SVG labels or metadata', () => {
   assert.ok(!svg.includes('<script>'));
   assert.match(svg, /&lt;script&gt;/);
   assert.match(svg, /&amp;/);
+});
+
+test('taps between tiny dots select the closest day, but copy and empty sky do not', () => {
+  const art = buildDayArtwork(analyzeGrants([grant('Alpha', 8018)]));
+  const first = art.dots[0], second = art.dots[1];
+  // Slightly nearer the first dot, outside its ink radius.
+  const x = first.x * 0.51 + second.x * 0.49;
+  const y = first.y * 0.51 + second.y * 0.49;
+  assert.ok(Math.hypot(x - first.x, y - first.y) > first.radius);
+  assert.equal(nearestDayDot(art.dots, x, y), 0);
+  assert.equal(nearestDayDot(art.dots, second.x, second.y), 1);
+  assert.equal(nearestDayDot(art.dots, 500, 760), null);
+  assert.equal(nearestDayDot(art.dots, 500, 510), null);
+  assert.equal(nearestDayDot(art.dots, 0, 0), null);
+  assert.equal(nearestDayDot([], 500, 200), null);
+  assert.equal(nearestDayDot(art.dots, NaN, 200), null);
 });
