@@ -23,7 +23,6 @@ export default function DayStudio() {
   const [dotInput, setDotInput] = useState('');
   const [lookupError, setLookupError] = useState('');
   const controller = useRef<AbortController | null>(null);
-  const artNode = useRef<HTMLDivElement>(null);
 
   const load = useCallback(async (refresh = false) => {
     controller.current?.abort();
@@ -62,11 +61,6 @@ export default function DayStudio() {
     setSelected(index); setDotInput(String(index + 1)); setLookupError('');
   }
 
-  useEffect(() => {
-    if (!dot) return;
-    artNode.current?.querySelector(`[data-dot-index="${dot.index}"]`)?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
-  }, [dot]);
-
   return <div className={styles.studio}>
     <header className={styles.heading}>
       <div><p className="eyebrow">P-Man / Artwork studio</p><h1>One dot. One good day.</h1>
@@ -90,7 +84,7 @@ export default function DayStudio() {
           </select></div>
         </div>
         <div className={styles.viewport}>
-          {art.total ? <div ref={artNode} className={styles.art} style={{ width: `${zoom * 100}%` }}
+          {art.total ? <div className={styles.art} style={{ width: `${zoom * 100}%` }}
             onClick={event => {
               const target = (event.target as Element).closest('[data-dot-index]');
               if (target) selectDot(Number(target.getAttribute('data-dot-index')));

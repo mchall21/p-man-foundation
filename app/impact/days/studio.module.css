@@ -9,7 +9,7 @@
 .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 20px; background: #fbfaf6; border-bottom: 1px solid #d8d8ce; font-size: 12px; color: #43585d; }
 .zoom { display: flex; gap: 8px; align-items: center; }
 .zoom select { padding: 5px; border: 1px solid #d8d8ce; border-radius: 4px; background: transparent; }
-.viewport { overflow: auto; max-height: 900px; }
+.viewport { overflow-x: auto; }
 .art { min-width: 100%; }
 .art svg { display: block; width: 100%; height: auto; }
 .art circle { cursor: crosshair; }
@@ -40,5 +40,5 @@
 .error { padding: 16px; background: #fff0df; border: 1px solid #cd9c63; border-radius: 6px; margin-bottom: 22px; font-size: 14px; }
 .loading { padding: 60px 24px; color: #53636a; text-align: center; }
 .studio button:disabled { opacity: .45; cursor: default; }
-@media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } .heading { flex-direction: column; align-items: start; } .inspector { max-width: 550px; width: 100%; } .viewport { max-height: 75vh; } }
+@media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } .heading { flex-direction: column; align-items: start; } .inspector { max-width: 550px; width: 100%; } }
 @media (max-width: 500px) { .studio { padding: 28px 16px 44px; } .toolbar { padding: 12px; font-size: 10px; } .actions button { font-size: 12px; padding: 12px; } .hint { padding: 12px; font-size: 11px; } }
