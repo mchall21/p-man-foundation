@@ -35,6 +35,20 @@ const compare = (a: string, b: string) => a < b ? -1 : a > b ? 1 : 0;
 const rounded = (n: number) => Math.round(n * 1000) / 1000;
 export const formatDays = (n: number) => n.toLocaleString('en-US');
 
+/** Hit-test in SVG coordinates: the spaces between dots belong to the nearest
+ * day too. Restrict selection to the sunrise, leaving the copy non-interactive. */
+export function nearestDayDot(dots: DayDot[], x: number, y: number): number | null {
+  if (!dots.length || !Number.isFinite(x) || !Number.isFinite(y)) return null;
+  const radius = Math.hypot(x - 500, y - 510);
+  if (y > 522 || radius < 50 || radius > 447) return null;
+  let nearest = 0, distance = Infinity;
+  for (let i = 0; i < dots.length; i++) {
+    const next = (dots[i].x - x) ** 2 + (dots[i].y - y) ** 2;
+    if (next < distance) { distance = next; nearest = i; }
+  }
+  return nearest;
+}
+
 // The feed has no permanent award IDs. This transparent composite key excludes
 // goodDays so increasing an award's estimate preserves its existing dot IDs.
 // Editing identifying source fields changes its key; duplicate rows get a suffix.

@@ -10,7 +10,10 @@
 .zoom { display: flex; gap: 8px; align-items: center; }
 .zoom select { padding: 5px; border: 1px solid #d8d8ce; border-radius: 4px; background: transparent; }
 .viewport { overflow-x: auto; }
+.tapPrompt { padding: 14px 20px; font-size: 13px; line-height: 1.5; background: #fbfaf6; border-bottom: 1px solid #d8d8ce; color: #43585d; }
+.tapPrompt strong { color: #19353e; }
 .art { min-width: 100%; }
+.art:focus-visible { outline-offset: -4px; }
 .art svg { display: block; width: 100%; height: auto; }
 .art circle { cursor: crosshair; }
 .art circle:hover { fill: #c45825; stroke: #c45825; stroke-width: 1; }
@@ -40,5 +43,16 @@
 .error { padding: 16px; background: #fff0df; border: 1px solid #cd9c63; border-radius: 6px; margin-bottom: 22px; font-size: 14px; }
 .loading { padding: 60px 24px; color: #53636a; text-align: center; }
 .studio button:disabled { opacity: .45; cursor: default; }
+.mobileGrant { display: none; }
 @media (max-width: 900px) { .layout { grid-template-columns: minmax(0, 1fr); } .heading { flex-direction: column; align-items: start; } .inspector { max-width: 550px; width: 100%; } }
+@media (max-width: 900px) {
+  .mobileGrant { display: block; position: fixed; z-index: 80; bottom: 12px; left: 12px; right: 12px; padding: 20px 20px max(16px, env(safe-area-inset-bottom)); background: #fbfaf6; border: 1px solid #d3d7cf; border-top: 3px solid #d99318; border-radius: 12px; box-shadow: 0 -6px 36px #19353e26; max-height: min(44vh, 350px); overflow-y: auto; }
+  .mobileGrant h2 { font-family: var(--font-playfair), Georgia, serif; font-size: 22px; line-height: 1.25; padding-right: 20px; margin: 10px 0; }
+  .mobileGrant .eyebrow { padding-right: 30px; font-size: 10px; }
+  .mobileDescription { font-size: 14px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .mobileMeta { margin-top: 10px; font-size: 12px; color: #53636a; }
+  .dismiss { position: absolute; top: 8px; right: 8px; width: 44px; height: 44px; font-size: 27px; }
+  .mobileActions { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 10px; }
+  .mobileActions button { min-height: 44px; font-size: 12px; text-decoration: underline; text-underline-offset: 4px; }
+}
 @media (max-width: 500px) { .studio { padding: 28px 16px 44px; } .toolbar { padding: 12px; font-size: 10px; } .actions button { font-size: 12px; padding: 12px; } .hint { padding: 12px; font-size: 11px; } }
