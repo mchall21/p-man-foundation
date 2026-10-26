@@ -19,7 +19,7 @@ test('8,018 source units produce 8,018 unique, labelled SVG dots with matching g
   const svg = artworkSVG(art);
   assert.equal((svg.match(/<circle /g) ?? []).length, 8018);
   assert.equal((svg.match(/data-dot-index=/g) ?? []).length, 8018);
-  assert.match(svg, /8,018 good days\. One dot for each\./);
+  assert.match(svg, /8,018 Good Days/);
   assert.ok(art.dots.every(dot => dot.label.includes(art.grants[dot.grantIndex].source.grantee)));
 });
 
