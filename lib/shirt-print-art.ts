@@ -29,11 +29,8 @@ export function kidsArtworkSVG(art: DayArtwork): string {
   <title>P-Man kids shirt: ${escapeXML(caption)}</title><metadata>${metadata}</metadata>
   <g id="good-week-dots">${shapes}</g>
   <g fill="#102f45" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
-    <text x="500" y="650" font-size="111" font-weight="700" letter-spacing="-4">ONE MORE</text>
-    <text x="500" y="760" font-size="111" font-weight="700" letter-spacing="-4">GOOD DAY</text>
-    <text x="500" y="832" font-size="31">${escapeXML(caption)}</text>
-    <text x="500" y="872" font-size="19">Each full dot is one good week.</text>
-    <text x="500" y="938" font-size="20" letter-spacing="4">PEDAL FOR P-MAN</text>
+    <text x="500" y="660" font-size="76" font-weight="700" letter-spacing="-2">${formatDays(fullWeeks)} Good Weeks</text>
+    <text x="500" y="750" font-size="58">And Counting</text>
   </g></svg>`;
 }
 

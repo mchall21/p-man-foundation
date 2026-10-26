@@ -161,13 +161,11 @@ export function artworkSVG(art: DayArtwork, includeCopy = true): string {
     grants: art.grants,
   }));
   const copy = includeCopy ? `<g fill="${NAVY}" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
-    <text x="500" y="650" font-size="111" font-weight="700" letter-spacing="-4">ONE MORE</text>
-    <text x="500" y="760" font-size="111" font-weight="700" letter-spacing="-4">GOOD DAY</text>
-    <text x="500" y="832" font-size="31">${formatDays(art.total)} good days. One dot for each.</text>
-    <text x="500" y="938" font-size="20" letter-spacing="4">PEDAL FOR P-MAN</text>
+    <text x="500" y="660" font-size="82" font-weight="700" letter-spacing="-2">${formatDays(art.total)} Good Days</text>
+    <text x="500" y="750" font-size="58">And Counting</text>
   </g>` : '';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="12in" height="${includeCopy ? '12in' : '6.72in'}" viewBox="0 0 1000 ${includeCopy ? 1000 : 560}" role="img" aria-labelledby="day-art-title day-art-description" data-total-dots="${art.total}">
-  <title id="day-art-title">One more good day: ${formatDays(art.total)} dots</title>
+  <title id="day-art-title">${formatDays(art.total)} Good Days. And Counting.</title>
   <desc id="day-art-description">Each dot represents one good day in the grant data. Select a dot to inspect its grant. The source counts are estimates of participation.</desc>
   <metadata>${metadata}</metadata><g id="good-day-dots">${circles}</g>${copy}</svg>`;
 }
