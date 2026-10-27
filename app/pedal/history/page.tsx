@@ -57,9 +57,17 @@ export default function PedalHistoryPage() {
           </section>
         ))}
         <section id="ride-2025" aria-labelledby="heading-2025" className="scroll-mt-28 border-t border-[#c7cfcd] pt-8">
-          <p className="font-playfair text-6xl text-[#3d6757] md:text-7xl">2025</p>
-          <h2 id="heading-2025" className="mt-4 font-playfair text-3xl">Ten years of showing up.</h2>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">The 2025 shirt celebrated our tenth anniversary with the message at the heart of it all: One More Good Day. Ten years of gathering, remembering Patrick, and riding together.</p>
+          <div className="grid items-center gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
+            <div>
+              <p className="font-playfair text-6xl text-[#3d6757] md:text-7xl">2025</p>
+              <h2 id="heading-2025" className="mt-4 font-playfair text-3xl">Ten years of showing up.</h2>
+              <p className="mt-4 max-w-sm leading-relaxed text-slate-600">The 2025 shirt celebrated our tenth anniversary with the message at the heart of it all: One More Good Day. Ten years of gathering, remembering Patrick, and riding together.</p>
+            </div>
+            <figure className="overflow-hidden rounded-2xl bg-[#e9e5da] p-3 sm:p-6">
+              <Image src="/images/pedal-history/tshirts/2025_Shirt.png" alt="The 2025 Pedal for P-Man shirt, front and back, with blue and orange One More Good Day lettering and a bicycle" width={2400} height={1200} sizes="(max-width: 768px) 100vw, 800px" className="h-auto w-full object-contain" />
+              <figcaption className="mt-3 text-center text-xs font-semibold uppercase tracking-widest text-slate-600">The 2025 shirt</figcaption>
+            </figure>
+          </div>
           <div className="my-8 grid gap-4 sm:grid-cols-3">{[pedal2025Photos[11], pedal2025Photos[0], pedal2025Photos[1]].map(photo => <Image key={photo.src} src={photo.src} alt={photo.alt} width={700} height={525} sizes="(max-width: 640px) 100vw, 33vw" className="aspect-[4/3] w-full rounded-xl object-cover" />)}</div>
           <Link href="/pedal/2025" className="button-secondary">More 2025 photos &amp; the film →</Link>
         </section>
